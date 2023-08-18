@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">OrienteeringSymbols</string>
+    <string name="reentrant_name">Re-entrant</string>
+    <string name="depression_name">Depression</string>
+    <string name="reentrant_description">A contour indentation; a valley; the opposite of a spur.</string>
+    <string name="depression_description">A depression or hollow from which the ground rises on all sides. Shown on the map with contour lines.</string>
+</resources>
