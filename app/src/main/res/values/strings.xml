@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">OrienteeringSymbols</string>
+    <string name="landforms">Landforms</string>
+    <string name="rock_and_boulder">Rock and Boulder</string>
+    <string name="back_button">Back</string>
+
     <string name="reentrant_name">Re-entrant</string>
-    <string name="depression_name">Depression</string>
     <string name="reentrant_description">A contour indentation; a valley; the opposite of a spur.</string>
+    <string name="depression_name">Depression</string>
     <string name="depression_description">A depression or hollow from which the ground rises on all sides. Shown on the map with contour lines.</string>
+    <string name="cliff">Cliff</string>
+    <string name="cliff_description">A cliff or rock face. May be passable or impassable.</string>
+    <string name="boulder">Boulder</string>
+    <string name="boulder_description">A prominent free-standing block of rock or stone.</string>
+
+    <string name="title_activity_main_screen">MainScreen</string>
 </resources>
