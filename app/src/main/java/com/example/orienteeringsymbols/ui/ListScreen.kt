@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,26 +20,31 @@ import com.example.orienteeringsymbols.R
 import com.example.orienteeringsymbols.data.Symbol
 
 @Composable
-fun SymbolListScreen(
-    symbolList: List<Symbol>
+fun ListScreen(
+    symbolList: List<Symbol>,
+    onSymbolClicked: (Symbol) -> Unit
 ) {
     LazyColumn() {
         items(symbolList) {
             SymbolItem(
                 symbol = it,
+                onSymbolClicked = onSymbolClicked,
                 modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
             )
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SymbolItem(
     symbol: Symbol,
+    onSymbolClicked: (Symbol) -> Unit,
     modifier: Modifier = Modifier
 ){
     Card(
-        modifier = modifier
+        modifier = modifier,
+        onClick = { onSymbolClicked(symbol) }
     ) {
         Row(
             modifier = Modifier

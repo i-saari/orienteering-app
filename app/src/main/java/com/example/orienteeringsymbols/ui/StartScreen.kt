@@ -28,7 +28,7 @@ fun StartScreen(
     modifier: Modifier = Modifier
 ){
     Column(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_small))
     ) {

@@ -25,13 +25,14 @@ import androidx.navigation.compose.rememberNavController
 import com.example.orienteeringsymbols.data.DataSource.symbolGroups
 import com.example.orienteeringsymbols.ui.SymbolsViewModel
 import com.example.orienteeringsymbols.ui.StartScreen
-import com.example.orienteeringsymbols.ui.SymbolListScreen
+import com.example.orienteeringsymbols.ui.ListScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.orienteeringsymbols.data.DataSource.symbols
+import com.example.orienteeringsymbols.ui.DetailsScreen
 
 enum class SymbolScreen(@StringRes val title: Int){
     Start(title = R.string.app_name),
-    SymbolList(title = R.string.landforms)
+    List(title = R.string.landforms),
+    Details(title = R.string.landforms)
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -90,16 +91,24 @@ fun SymbolsApp(
                     symbolGroups = symbolGroups,
                     onGroupButtonClicked = {
                         viewModel.setGroup(it)
-                        navController.navigate(SymbolScreen.SymbolList.name)
+                        navController.navigate(SymbolScreen.List.name)
                     }
                 )
             }
-            composable(route = SymbolScreen.SymbolList.name) {
-                SymbolListScreen(
-                    symbolList = viewModel.getGroupSymbols()
+            composable(route = SymbolScreen.List.name) {
+                ListScreen(
+                    symbolList = viewModel.getGroupSymbols(),
+                    onSymbolClicked = {
+                        viewModel.setSymbol(it)
+                        navController.navigate(SymbolScreen.Details.name)
+                    }
                 )
             }
-
+            composable(route = SymbolScreen.Details.name) {
+                DetailsScreen(
+                    symbol = uiState.symbol
+                )
+            }
         }
     }
 }

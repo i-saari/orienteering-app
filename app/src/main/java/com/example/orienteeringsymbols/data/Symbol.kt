@@ -9,4 +9,6 @@ data class Symbol(
     @DrawableRes val mapImageResourceId: Int,
     @StringRes val name: Int,
     @StringRes val description: Int
-)
+) {
+    constructor() : this(0, 0, 0, 0, 0)
+}
