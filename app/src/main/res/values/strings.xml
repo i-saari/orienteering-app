@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">OrienteeringSymbols</string>
+    <string name="list">List</string>
+    <string name="drawer_list_description">List navigation button</string>
     <string name="landforms">Landforms</string>
     <string name="rock_and_boulder">Rock and Boulder</string>
     <string name="back_button">Back</string>
+    <string name="drawer_icon_description">Menu navigation button</string>
 
     <string name="reentrant_name">Re-entrant</string>
     <string name="reentrant_description">A contour indentation; a valley; the opposite of a spur.</string>
