@@ -1,30 +1,22 @@
 package com.example.orienteeringsymbols
 
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.rememberDrawerState
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.NavHost
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
-import com.example.orienteeringsymbols.data.DataSource.symbolGroups
-import com.example.orienteeringsymbols.ui.SymbolsViewModel
-import com.example.orienteeringsymbols.ui.StartScreen
-import com.example.orienteeringsymbols.ui.ListScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.orienteeringsymbols.ui.DetailsScreen
-import com.example.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.orienteeringsymbols.ui.ListScreen
+import com.example.orienteeringsymbols.ui.SymbolsViewModel
 import com.example.orienteeringsymbols.ui.components.appdrawer.AppDrawerContent
 import com.example.orienteeringsymbols.ui.components.appdrawer.AppDrawerItemInfo
 
@@ -50,10 +42,6 @@ fun SymbolsApp(
     navController: NavHostController = rememberNavController(),
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 ) {
-//    val backStackEntry by navController.currentBackStackEntryAsState()
-//    val currentScreen = NavOptions.valueOf(
-//        backStackEntry?.destination?.route ?: NavOptions.Start.name
-//    )
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -80,49 +68,8 @@ fun SymbolsApp(
             modifier = Modifier
         ) {
             composable(route = NavOptions.List.name) {
-                ListScreen(drawerState)
+                ListScreen(drawerState = drawerState, title = R.string.list)
             }
         }
     }
 }
-
-
-//Scaffold(
-//topBar = {
-//    SymbolsAppBar(
-//        currentScreen = currentScreen,
-//        canNavigateBack = navController.previousBackStackEntry != null,
-//        navigateUp = { navController.navigateUp() })
-//}
-//) { innerPadding ->
-//    val uiState by viewModel.uiState.collectAsState()
-//    NavHost(
-//        navController = navController,
-//        startDestination = NavOptions.Start.name,
-//        modifier = Modifier.padding(innerPadding)
-//    ) {
-//        composable(route = NavOptions.Start.name) {
-//            StartScreen(
-//                symbolGroups = symbolGroups,
-//                onGroupButtonClicked = {
-//                    viewModel.setGroup(it)
-//                    navController.navigate(NavOptions.List.name)
-//                }
-//            )
-//        }
-//        composable(route = NavOptions.List.name) {
-//            ListScreen(
-//                symbolList = viewModel.getGroupSymbols(),
-//                onSymbolClicked = {
-//                    viewModel.setSymbol(it)
-//                    navController.navigate(NavOptions.Details.name)
-//                }
-//            )
-//        }
-//        composable(route = NavOptions.Details.name) {
-//            DetailsScreen(
-//                symbol = uiState.symbol
-//            )
-//        }
-//    }
-//}

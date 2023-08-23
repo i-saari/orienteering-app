@@ -23,11 +23,11 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SymbolsAppBar(
+    modifier: Modifier = Modifier,
     drawerState: DrawerState? = null,
     navigationIcon: (@Composable () -> Unit)? = null,
     @StringRes title: Int? = null,
-    appBarActions: List<AppBarAction>? = null,
-    modifier: Modifier = Modifier
+    appBarActions: List<AppBarAction>? = null
 ) {
     TopAppBar(
         title = {
@@ -84,4 +84,39 @@ fun AppBarAction(appBarAction: AppBarAction) {
             contentDescription = stringResource(id = appBarAction.description)
         )
     }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun SymbolsAppBarNoDrawer(
+    modifier: Modifier = Modifier,
+    navigationIcon: (@Composable () -> Unit)? = null,
+    @StringRes title: Int? = null,
+    appBarActions: List<AppBarAction>? = null
+) {
+    TopAppBar(
+        title = {
+            title?.let {
+                Text(
+                    text = stringResource(id = title),
+                    style = MaterialTheme.typography.titleMedium
+                )
+            }
+        },
+//        colors = TopAppBarDefaults.mediumTopAppBarColors(
+//            containerColor = MaterialTheme.colorScheme.primaryContainer
+//        ),
+        actions = {
+            appBarActions?.let {
+                for (appBarAction in it) {
+                    AppBarAction(appBarAction)
+                }
+            }
+        },
+        modifier = modifier,
+        navigationIcon = {
+            navigationIcon?.invoke()
+        }
+    )
 }
