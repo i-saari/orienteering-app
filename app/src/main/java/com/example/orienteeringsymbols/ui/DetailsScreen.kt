@@ -38,12 +38,12 @@ fun DetailsScreen(
                 painter = painterResource(id = symbol.controlImageResourceId),
                 contentDescription = stringResource(id = symbol.name)
             )
-            Image(
-                modifier = Modifier,
-                contentScale = ContentScale.Crop,
-                painter = painterResource(id = symbol.mapImageResourceId),
-                contentDescription = stringResource(id = symbol.name)
-            )
+//            Image(
+//                modifier = Modifier,
+//                contentScale = ContentScale.Crop,
+//                painter = painterResource(id = symbol.mapImageResourceId),
+//                contentDescription = stringResource(id = symbol.name)
+//            )
             Text(
                 text = stringResource(id = symbol.name),
                 style = MaterialTheme.typography.displayMedium,
