@@ -10,10 +10,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.example.orienteeringsymbols.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -22,23 +24,22 @@ fun <T> AppDrawerItem(
     onClick: (options: T) -> Unit
 ) {
     Surface(
-        color = MaterialTheme.colorScheme.onPrimary,
+//        color = MaterialTheme.colorScheme.onPrimary,
         modifier = Modifier
             .width(200.dp)
-            .padding(16.dp),
+            .padding(start = dimensionResource(id = R.dimen.padding_medium)),
         onClick = { onClick(item.drawerOption) }
     ) {
         Row(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
-                .padding(8.dp)
         ) {
             Icon(
                 painter = painterResource(id = item.drawableId),
                 contentDescription = stringResource(id = item.descriptionId),
                 modifier = Modifier
-                    .size(24.dp)
+                    .size(dimensionResource(id = R.dimen.icon_size))
             )
             Spacer(modifier = Modifier.width(16.dp))
             Text(

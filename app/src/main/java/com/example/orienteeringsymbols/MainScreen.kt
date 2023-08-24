@@ -81,10 +81,10 @@ fun SymbolsApp(
             modifier = Modifier
         ) {
             composable(route = NavOptions.List.name) {
-                ListScreen(drawerState = drawerState, title = R.string.list)
+                ListScreen(drawerState = drawerState, title = NavOptions.List.title)
             }
             composable(route = NavOptions.Grid.name) {
-                GridScreen(drawerState = drawerState, title = R.string.grid)
+                GridScreen(drawerState = drawerState, title = NavOptions.Grid.title)
             }
         }
     }
