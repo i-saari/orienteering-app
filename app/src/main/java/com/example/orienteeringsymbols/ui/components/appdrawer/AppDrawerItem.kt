@@ -43,7 +43,7 @@ fun <T> AppDrawerItem(
             Spacer(modifier = Modifier.width(16.dp))
             Text(
                 text = stringResource(id = item.title),
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodyLarge,
                 textAlign = TextAlign.Center
             )
         }

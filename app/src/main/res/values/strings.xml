@@ -2,6 +2,8 @@
     <string name="app_name">OrienteeringSymbols</string>
     <string name="list">List</string>
     <string name="drawer_list_description">List navigation button</string>
+    <string name="grid">Grid</string>
+    <string name="drawer_grid_description">Grid navigation button</string>
     <string name="landforms">Landforms</string>
     <string name="rock_and_boulder">Rock and Boulder</string>
     <string name="back_button">Back</string>

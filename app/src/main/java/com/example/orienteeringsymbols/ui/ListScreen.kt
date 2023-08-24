@@ -17,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -60,7 +61,7 @@ fun ListScreen(
                 .padding(innerPadding)
         ) {
             items(symbols) {
-                SymbolItem(
+                SymbolListItem(
                     symbol = it,
 //                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
                     modifier = Modifier
@@ -71,13 +72,16 @@ fun ListScreen(
 }
 
 @Composable
-fun SymbolItem(
+fun SymbolListItem(
     symbol: Symbol,
     modifier: Modifier = Modifier
 ){
     var expanded by remember { mutableStateOf(false) }
     Card(
-        modifier = modifier
+        modifier = modifier,
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.surface
+        )
     ) {
         Column(
             modifier = Modifier
@@ -94,7 +98,9 @@ fun SymbolItem(
                     .padding(dimensionResource(R.dimen.padding_small))
             ) {
                 Image(
-                    modifier = modifier.size(dimensionResource(R.dimen.image_size)),
+                    modifier = modifier
+                        .size(dimensionResource(R.dimen.image_size))
+                        .padding(all = dimensionResource(id = R.dimen.padding_small)),
                     contentScale = ContentScale.FillHeight,
                     painter = painterResource(id = symbol.controlImageResourceId),
                     contentDescription = stringResource(id = symbol.name)
@@ -105,6 +111,7 @@ fun SymbolItem(
 //                painter = painterResource(id = symbol.mapImageResourceId),
 //                contentDescription = stringResource(id = symbol.name)
 //            )
+
                 Column(modifier = Modifier) {
                     Text(
                         text = stringResource(id = symbol.name),
@@ -185,7 +192,7 @@ fun ListScreenNoDrawer(
                 .padding(innerPadding)
         ) {
             items(symbols) {
-                SymbolItem(
+                SymbolListItem(
                     symbol = it,
                     modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
                 )
