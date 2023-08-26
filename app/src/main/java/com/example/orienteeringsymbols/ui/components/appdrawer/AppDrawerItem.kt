@@ -26,7 +26,7 @@ fun <T> AppDrawerItem(
     Surface(
 //        color = MaterialTheme.colorScheme.onPrimary,
         modifier = Modifier
-            .width(200.dp)
+            .width(300.dp)
             .padding(start = dimensionResource(id = R.dimen.padding_medium)),
         onClick = { onClick(item.drawerOption) }
     ) {

@@ -4,11 +4,7 @@ import com.example.orienteeringsymbols.R
 
 object DataSource {
     val symbols = listOf(
-        Symbol(R.string.differentiator, R.drawable.northern_control, R.string.northern_name, R.string.northern_description),
-        Symbol(R.string.differentiator, R.drawable.south_eastern_control, R.string.south_eastern_name, R.string.south_eastern_description),
-        Symbol(R.string.differentiator, R.drawable.upper_control, R.string.upper_name, R.string.upper_description),
-        Symbol(R.string.differentiator, R.drawable.lower_control, R.string.lower_name, R.string.lower_description),
-        Symbol(R.string.differentiator, R.drawable.middle_control, R.string.middle_name, R.string.middle_description),
+
         Symbol(R.string.landforms, R.drawable.terrace_control, R.string.terrace_name, R.string.terrace_description),
         Symbol(R.string.landforms, R.drawable.spur_control, R.string.spur_name, R.string.spur_description),
         Symbol(R.string.landforms, R.drawable.reentrant_control, R.string.reentrant_name, R.string.reentrant_description),
@@ -95,6 +91,11 @@ object DataSource {
         Symbol(R.string.shape, R.drawable.crossing_control, R.string.crossing_name, R.string.crossing_description),
         Symbol(R.string.shape, R.drawable.junction_control, R.string.junction_name, R.string.junction_description),
         Symbol(R.string.shape, R.drawable.bend_control, R.string.bend_name, R.string.bend_description),
+        Symbol(R.string.differentiator, R.drawable.northern_control, R.string.northern_name, R.string.northern_description),
+        Symbol(R.string.differentiator, R.drawable.south_eastern_control, R.string.south_eastern_name, R.string.south_eastern_description),
+        Symbol(R.string.differentiator, R.drawable.upper_control, R.string.upper_name, R.string.upper_description),
+        Symbol(R.string.differentiator, R.drawable.lower_control, R.string.lower_name, R.string.lower_description),
+        Symbol(R.string.differentiator, R.drawable.middle_control, R.string.middle_name, R.string.middle_description),
         Symbol(R.string.location, R.drawable.north_east_side_control, R.string.north_east_side_name, R.string.north_east_side_description),
         Symbol(R.string.location, R.drawable.south_east_edge_control, R.string.south_east_edge_name, R.string.south_east_edge_description),
         Symbol(R.string.location, R.drawable.west_part_control, R.string.west_part_name, R.string.west_part_description),
@@ -110,5 +111,28 @@ object DataSource {
         Symbol(R.string.location, R.drawable.beneath_control, R.string.beneath_name, R.string.beneath_description),
         Symbol(R.string.location, R.drawable.between_control, R.string.between_name, R.string.between_description),
 
+    )
+
+    val descriptionColumns = listOf(
+        DescriptionColumn(R.string.con_des_A_title, R.string.con_des_A_body),
+        DescriptionColumn(R.string.con_des_B_title, R.string.con_des_B_body),
+        DescriptionColumn(R.string.con_des_C_title, R.string.con_des_C_body),
+        DescriptionColumn(R.string.con_des_D_title, R.string.con_des_D_body),
+        DescriptionColumn(R.string.con_des_E_title, R.string.con_des_E_body),
+        DescriptionColumn(R.string.con_des_F_title, R.string.con_des_F_body),
+        DescriptionColumn(R.string.con_des_G_title, R.string.con_des_G_body),
+        DescriptionColumn(R.string.con_des_H_title, R.string.con_des_H_body),
+    )
+
+    val specialInstructions = listOf(
+        SpecialInstruction(R.drawable.special1_control, R.string.con_des_S1_body, R.string.con_des_S1_body),
+        SpecialInstruction(R.drawable.special2_control, R.string.con_des_S2_body, R.string.con_des_S2_body),
+        SpecialInstruction(R.drawable.special3_control, R.string.con_des_S3_body, R.string.con_des_S3_body),
+        SpecialInstruction(R.drawable.special4_control, R.string.con_des_S4_body, R.string.con_des_S4_body),
+        SpecialInstruction(R.drawable.special5_control, R.string.con_des_S5_body, R.string.con_des_S5_body),
+        SpecialInstruction(R.drawable.special6_control, R.string.con_des_S6_body, R.string.con_des_S6_body),
+        SpecialInstruction(R.drawable.special7_control, R.string.con_des_S7_body, R.string.con_des_S7_body),
+        SpecialInstruction(R.drawable.special8_control, R.string.con_des_S8_body, R.string.con_des_S8_body),
+        SpecialInstruction(R.drawable.special9_control, R.string.con_des_S9_body, R.string.con_des_S9_body),
     )
 }

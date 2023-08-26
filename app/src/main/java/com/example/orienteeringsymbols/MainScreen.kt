@@ -15,6 +15,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.orienteeringsymbols.ui.DescriptionScreen
 import com.example.orienteeringsymbols.ui.GridScreen
 import com.example.orienteeringsymbols.ui.ListScreen
 import com.example.orienteeringsymbols.ui.SymbolsViewModel
@@ -23,7 +24,8 @@ import com.example.orienteeringsymbols.ui.components.appdrawer.AppDrawerItemInfo
 
 enum class NavOptions(@StringRes val title: Int){
     List(title = R.string.list),
-    Grid(title = R.string.grid)
+    Grid(title = R.string.grid),
+    Description(title = R.string.description)
 }
 
 object DrawerParams {
@@ -39,6 +41,12 @@ object DrawerParams {
             R.string.grid,
             R.drawable.grid,
             R.string.drawer_grid_description
+        ),
+        AppDrawerItemInfo(
+            NavOptions.Description,
+            R.string.description,
+            R.drawable.control_description,
+            R.string.drawer_description_description
         )
     )
 }
@@ -69,6 +77,11 @@ fun SymbolsApp(
                             popUpTo(NavOptions.Grid.name)
                         }
                     }
+                    NavOptions.Description -> {
+                        navController.navigate(route.name) {
+                            popUpTo(NavOptions.Description.name)
+                        }
+                    }
                 }
             }
         }
@@ -85,6 +98,9 @@ fun SymbolsApp(
             }
             composable(route = NavOptions.Grid.name) {
                 GridScreen(drawerState = drawerState, title = NavOptions.Grid.title)
+            }
+            composable(route = NavOptions.Description.name) {
+                DescriptionScreen(drawerState = drawerState, title = NavOptions.Description.title)
             }
         }
     }
