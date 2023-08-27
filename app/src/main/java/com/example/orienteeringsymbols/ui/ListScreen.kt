@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
@@ -29,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -46,7 +48,8 @@ import com.example.orienteeringsymbols.ui.components.appbar.SymbolsAppBarNoDrawe
 @Composable
 fun ListScreen(
     drawerState: DrawerState,
-    @StringRes title: Int
+    @StringRes title: Int,
+    scrollPosition: Symbol
 ) {
     Scaffold(
         topBar = {
@@ -55,15 +58,19 @@ fun ListScreen(
                 title = title
         ) }
     ) {innerPadding ->
+        val listState = rememberLazyListState(
+            initialFirstVisibleItemIndex = symbols.indexOf(scrollPosition)
+        )
+        val coroutineScope = rememberCoroutineScope()
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(innerPadding)
+                .padding(innerPadding),
+            state = listState
         ) {
             items(symbols) {
                 SymbolListItem(
                     symbol = it,
-//                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
                     modifier = Modifier
                 )
             }

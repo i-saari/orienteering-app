@@ -13,16 +13,6 @@ class SymbolsViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(SymbolsUiState())
     val uiState: StateFlow<SymbolsUiState> = _uiState.asStateFlow()
 
-    fun setGroup(selectedGroup: Int) {
-        _uiState.update { currentState ->
-            currentState.copy(group = selectedGroup)
-        }
-    }
-
-    fun getGroupSymbols(): List<Symbol> {
-        return symbols.filter { it.group == _uiState.value.group }
-    }
-
     fun setSymbol(selectedSymbol: Symbol) {
         _uiState.update { currentState ->
             currentState.copy(symbol = selectedSymbol)

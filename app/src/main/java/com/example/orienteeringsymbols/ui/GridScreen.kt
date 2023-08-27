@@ -2,10 +2,12 @@ package com.example.orienteeringsymbols.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material3.Card
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -26,7 +28,8 @@ import com.example.orienteeringsymbols.ui.components.appbar.SymbolsAppBarNoDrawe
 @Composable
 fun GridScreen(
     drawerState: DrawerState,
-    @StringRes title: Int
+    @StringRes title: Int,
+    onSymbolClick: (Symbol) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -41,20 +44,23 @@ fun GridScreen(
         ) {
             items(symbols) {
                 SymbolGridItem(
-                    symbol = it
+                    symbol = it,
+                    onSymbolClick = onSymbolClick
                 )
             }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SymbolGridItem(
     symbol: Symbol,
+    onSymbolClick: (Symbol) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Image(
-        modifier = modifier,
+        modifier = modifier.clickable { onSymbolClick(symbol) },
         contentScale = ContentScale.Crop,
         painter = painterResource(id = symbol.controlImageResourceId),
         contentDescription = stringResource(id = symbol.name)
@@ -78,7 +84,8 @@ fun GridScreenNoDrawer(
         ) {
             items(symbols) {
                 SymbolGridItem(
-                    symbol = it
+                    symbol = it,
+                    onSymbolClick = {}
                 )
             }
         }

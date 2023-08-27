@@ -69,17 +69,17 @@ fun SymbolsApp(
                 when(route) {
                     NavOptions.List -> {
                         navController.navigate(route.name) {
-                            popUpTo(NavOptions.List.name)
+//                            popUpTo(NavOptions.List.name)
                         }
                     }
                     NavOptions.Grid -> {
                         navController.navigate(route.name) {
-                            popUpTo(NavOptions.Grid.name)
+//                            popUpTo(NavOptions.Grid.name)
                         }
                     }
                     NavOptions.Description -> {
                         navController.navigate(route.name) {
-                            popUpTo(NavOptions.Description.name)
+//                            popUpTo(NavOptions.Description.name)
                         }
                     }
                 }
@@ -94,10 +94,21 @@ fun SymbolsApp(
             modifier = Modifier
         ) {
             composable(route = NavOptions.List.name) {
-                ListScreen(drawerState = drawerState, title = NavOptions.List.title)
+                ListScreen(
+                    drawerState = drawerState,
+                    title = NavOptions.List.title,
+                    scrollPosition = uiState.symbol
+                )
             }
             composable(route = NavOptions.Grid.name) {
-                GridScreen(drawerState = drawerState, title = NavOptions.Grid.title)
+                GridScreen(
+                    drawerState = drawerState,
+                    title = NavOptions.Grid.title,
+                    onSymbolClick = {
+                        viewModel.setSymbol(it)
+                        navController.navigate(NavOptions.List.name)
+                    }
+                )
             }
             composable(route = NavOptions.Description.name) {
                 DescriptionScreen(drawerState = drawerState, title = NavOptions.Description.title)
