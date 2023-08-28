@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols.ui
+package com.example.orienteeringsymbols.ui.screens
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateContentSize
