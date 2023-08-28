@@ -1,5 +1,6 @@
 package com.example.orienteeringsymbols.ui.components.appdrawer
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,18 +39,24 @@ fun <T : Enum<T>> AppDrawerContent(
     modifier: Modifier = Modifier,
     drawerState: DrawerState,
     menuItems: List<AppDrawerItemInfo<T>>,
-    defaultPick: T,
     onClick: (T) -> Unit
 ) {
-    var currentPick by remember { mutableStateOf(defaultPick) }
     val coroutineScope = rememberCoroutineScope()
+
+    BackHandler(
+        enabled = drawerState.isOpen,
+    ) {
+        coroutineScope.launch {
+            drawerState.close()
+        }
+    }
 
     ModalDrawerSheet(
         drawerShape = RoundedCornerShape(0.dp),
 //        modifier = Modifier.wrapContentWidth()
     ) {
         Surface(
-//            color = MaterialTheme.colorScheme.background
+            color = MaterialTheme.colorScheme.background
         ) {
             Column(
                 horizontalAlignment = Alignment.Start
@@ -65,15 +72,8 @@ fun <T : Enum<T>> AppDrawerContent(
                     horizontalAlignment = Alignment.Start
                 ) {
                     items(menuItems) { item ->
+//                        val selected = item.drawerOption.name == backStackEntry.value?.destination?.route
                         AppDrawerItem(item = item) { navOption ->
-                            if (currentPick == navOption) {
-                                coroutineScope.launch {
-                                    drawerState.close()
-                                }
-                                return@AppDrawerItem
-                            }
-
-                            currentPick = navOption
                             coroutineScope.launch {
                                 drawerState.close()
                             }

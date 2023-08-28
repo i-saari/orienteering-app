@@ -1,5 +1,6 @@
 package com.example.orienteeringsymbols
 
+import androidx.activity.compose.BackHandler
 import androidx.annotation.StringRes
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -9,8 +10,11 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -64,22 +68,21 @@ fun SymbolsApp(
             AppDrawerContent(
                 drawerState = drawerState,
                 menuItems = DrawerParams.drawerButtons,
-                defaultPick = NavOptions.List,
             ) { route ->
                 when(route) {
                     NavOptions.List -> {
                         navController.navigate(route.name) {
-//                            popUpTo(NavOptions.List.name)
+                            popUpTo(NavOptions.List.name)
                         }
                     }
                     NavOptions.Grid -> {
                         navController.navigate(route.name) {
-//                            popUpTo(NavOptions.Grid.name)
+                            popUpTo(NavOptions.Grid.name)
                         }
                     }
                     NavOptions.Description -> {
                         navController.navigate(route.name) {
-//                            popUpTo(NavOptions.Description.name)
+                            popUpTo(NavOptions.Description.name)
                         }
                     }
                 }
@@ -104,7 +107,7 @@ fun SymbolsApp(
                 GridScreen(
                     drawerState = drawerState,
                     title = NavOptions.Grid.title,
-                    onSymbolClick = {
+                    onGridSymbolClick = {
                         viewModel.setSymbol(it)
                         navController.navigate(NavOptions.List.name)
                     }

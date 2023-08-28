@@ -29,7 +29,7 @@ import com.example.orienteeringsymbols.ui.components.appbar.SymbolsAppBarNoDrawe
 fun GridScreen(
     drawerState: DrawerState,
     @StringRes title: Int,
-    onSymbolClick: (Symbol) -> Unit
+    onGridSymbolClick: (Symbol) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -45,7 +45,7 @@ fun GridScreen(
             items(symbols) {
                 SymbolGridItem(
                     symbol = it,
-                    onSymbolClick = onSymbolClick
+                    onGridSymbolClick = onGridSymbolClick
                 )
             }
         }
@@ -56,11 +56,11 @@ fun GridScreen(
 @Composable
 fun SymbolGridItem(
     symbol: Symbol,
-    onSymbolClick: (Symbol) -> Unit,
+    onGridSymbolClick: (Symbol) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Image(
-        modifier = modifier.clickable { onSymbolClick(symbol) },
+        modifier = modifier.clickable { onGridSymbolClick(symbol) },
         contentScale = ContentScale.Crop,
         painter = painterResource(id = symbol.controlImageResourceId),
         contentDescription = stringResource(id = symbol.name)
@@ -85,7 +85,7 @@ fun GridScreenNoDrawer(
             items(symbols) {
                 SymbolGridItem(
                     symbol = it,
-                    onSymbolClick = {}
+                    onGridSymbolClick = {}
                 )
             }
         }

@@ -10,6 +10,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -21,7 +22,8 @@ import com.example.orienteeringsymbols.R
 @Composable
 fun <T> AppDrawerItem(
     item: AppDrawerItemInfo<T>,
-    onClick: (options: T) -> Unit
+    onClick: (options: T) -> Unit,
+
 ) {
     Surface(
 //        color = MaterialTheme.colorScheme.onPrimary,
@@ -30,6 +32,7 @@ fun <T> AppDrawerItem(
             .padding(start = dimensionResource(id = R.dimen.padding_medium)),
         onClick = { onClick(item.drawerOption) }
     ) {
+
         Row(
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically,
