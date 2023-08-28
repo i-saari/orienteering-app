@@ -110,8 +110,12 @@ object DataSource {
         Symbol(R.string.location, R.drawable.north_east_foot_control, R.string.north_east_foot_name, R.string.north_east_foot_description),
         Symbol(R.string.location, R.drawable.beneath_control, R.string.beneath_name, R.string.beneath_description),
         Symbol(R.string.location, R.drawable.between_control, R.string.between_name, R.string.between_description),
+        Symbol(R.string.dimensions, R.drawable.height_or_depth_control, R.string.height_or_depth_name, R.string.height_or_depth_description),
+        Symbol(R.string.dimensions, R.drawable.height_on_slope_control, R.string.height_on_slope_name, R.string.height_on_slope_description),
+        Symbol(R.string.dimensions, R.drawable.size_control, R.string.size_name, R.string.size_description),
+        Symbol(R.string.dimensions, R.drawable.height_two_features_control, R.string.height_two_features_name, R.string.height_two_features_description),
 
-    )
+        )
 
     val descriptionColumns = listOf(
         DescriptionColumn(R.string.con_des_A_title, R.string.con_des_A_body),
