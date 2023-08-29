@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols
+package com.knollsoftware.orienteeringsymbols
 
 import androidx.annotation.StringRes
 import androidx.compose.material3.DrawerState
@@ -15,12 +15,13 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.orienteeringsymbols.ui.SymbolsViewModel
-import com.example.orienteeringsymbols.ui.components.appdrawer.AppDrawerContent
-import com.example.orienteeringsymbols.ui.components.appdrawer.AppDrawerItemInfo
-import com.example.orienteeringsymbols.ui.screens.DescriptionScreen
-import com.example.orienteeringsymbols.ui.screens.GridScreen
-import com.example.orienteeringsymbols.ui.screens.ListScreen
+import com.knollsoftware.orienteeringsymbols.data.DataSource.symbols
+import com.knollsoftware.orienteeringsymbols.ui.SymbolsViewModel
+import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerContent
+import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerItemInfo
+import com.knollsoftware.orienteeringsymbols.ui.screens.DescriptionScreen
+import com.knollsoftware.orienteeringsymbols.ui.screens.GridScreen
+import com.knollsoftware.orienteeringsymbols.ui.screens.ListScreen
 
 enum class NavOptions(@StringRes val title: Int){
     List(title = R.string.list),
@@ -96,7 +97,12 @@ fun SymbolsApp(
                 ListScreen(
                     drawerState = drawerState,
                     title = NavOptions.List.title,
-                    scrollPosition = uiState.symbol
+                    scrollPosition = uiState.symbol,
+                    highlight = uiState.highlight,
+                    resetList = {
+                        viewModel.setHighlight(false)
+                        viewModel.setSymbol(symbols.first())
+                    }
                 )
             }
             composable(route = NavOptions.Grid.name) {
@@ -105,6 +111,7 @@ fun SymbolsApp(
                     title = NavOptions.Grid.title,
                     onGridSymbolClick = {
                         viewModel.setSymbol(it)
+                        viewModel.setHighlight(true)
                         navController.navigate(NavOptions.List.name)
                     }
                 )

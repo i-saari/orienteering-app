@@ -1,16 +1,26 @@
-package com.example.orienteeringsymbols.ui.screens
+package com.knollsoftware.orienteeringsymbols.ui.screens
 
 import androidx.annotation.StringRes
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -27,41 +37,57 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.orienteeringsymbols.R
-import com.example.orienteeringsymbols.data.DataSource.symbols
-import com.example.orienteeringsymbols.data.Symbol
-import com.example.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
-import com.example.orienteeringsymbols.ui.components.appbar.SymbolsAppBarNoDrawer
+import androidx.compose.ui.unit.dp
+import com.knollsoftware.orienteeringsymbols.R
+import com.knollsoftware.orienteeringsymbols.data.DataSource.symbols
+import com.knollsoftware.orienteeringsymbols.data.Symbol
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
+import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListScreen(
     drawerState: DrawerState,
     @StringRes title: Int,
-    scrollPosition: Symbol
+    scrollPosition: Symbol,
+    highlight: Boolean,
+    resetList: () -> Unit
 ) {
+    val animateDuration = 600L
+    var triggerFlash by remember { mutableStateOf(false) }
+    val baseColor = MaterialTheme.colorScheme.surface
+    val flashColor = MaterialTheme.colorScheme.primary
+    val animatedColor by animateColorAsState(
+        targetValue = if (triggerFlash) baseColor else flashColor,
+        animationSpec = keyframes {
+            durationMillis = animateDuration.toInt()
+            baseColor at 0
+            baseColor at 200
+            flashColor at 400
+            baseColor at 600
+        }
+    )
     Scaffold(
         topBar = {
             SymbolsAppBar(
                 drawerState = drawerState,
                 title = title
         ) }
-    ) {innerPadding ->
+    ) { innerPadding ->
         val listState = rememberLazyListState(
             initialFirstVisibleItemIndex = symbols.indexOf(scrollPosition)
         )
-        val coroutineScope = rememberCoroutineScope()
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -69,25 +95,38 @@ fun ListScreen(
             state = listState
         ) {
             items(symbols) {
+                val color = if (it == scrollPosition && highlight) {
+                    animatedColor
+                } else {
+                    baseColor
+                }
                 SymbolListItem(
                     symbol = it,
-                    modifier = Modifier
+                    color = color
                 )
+
             }
         }
+    }
+    LaunchedEffect(Unit) {
+        triggerFlash = !triggerFlash
+        delay(animateDuration)
+        resetList()
     }
 }
 
 @Composable
 fun SymbolListItem(
     symbol: Symbol,
+    color: Color,
     modifier: Modifier = Modifier
 ){
     var expanded by remember { mutableStateOf(false) }
     Card(
-        modifier = modifier,
+        modifier = modifier
+            .clickable { expanded = !expanded },
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface
+            containerColor = color
         )
     ) {
         Column(
@@ -104,6 +143,13 @@ fun SymbolListItem(
                     .fillMaxWidth()
                     .padding(dimensionResource(R.dimen.padding_small))
             ) {
+//                Box(
+//                    modifier = Modifier
+//                        .fillMaxHeight()
+//                        .width(1.dp)
+//                        .background(color = Color.Green)
+//                        .padding(dimensionResource(id = R.dimen.padding_small))
+//                )
                 Image(
                     modifier = modifier
                         .size(dimensionResource(R.dimen.image_size))
@@ -112,13 +158,6 @@ fun SymbolListItem(
                     painter = painterResource(id = symbol.controlImageResourceId),
                     contentDescription = stringResource(id = symbol.name)
                 )
-//            Image(
-//                modifier = modifier,
-//                contentScale = ContentScale.Crop,
-//                painter = painterResource(id = symbol.mapImageResourceId),
-//                contentDescription = stringResource(id = symbol.name)
-//            )
-
                 Column(modifier = Modifier) {
                     Text(
                         text = stringResource(id = symbol.name),
@@ -165,7 +204,6 @@ fun SymbolExpandButton(
         Icon(
             imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
             contentDescription = stringResource(id = R.string.expand_button_content_description)
-            // tint = MaterialTheme.colorScheme.secondary
         )
     }
 }
@@ -180,36 +218,4 @@ fun SymbolDescription(
         style = MaterialTheme.typography.bodyLarge,
         modifier = modifier
     )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun ListScreenNoDrawer(
-    @StringRes title: Int
-) {
-    Scaffold(
-        topBar = {
-            SymbolsAppBarNoDrawer(
-                title = title
-            ) }
-    ) {innerPadding ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(innerPadding)
-        ) {
-            items(symbols) {
-                SymbolListItem(
-                    symbol = it,
-                    modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
-                )
-            }
-        }
-    }
-}
-
-@Preview
-@Composable
-fun SymbolListPreview(){
-    ListScreenNoDrawer(title = R.string.list)
 }
