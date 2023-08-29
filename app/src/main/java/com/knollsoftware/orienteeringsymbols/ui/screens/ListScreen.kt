@@ -3,9 +3,6 @@ package com.knollsoftware.orienteeringsymbols.ui.screens
 import androidx.annotation.StringRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
-import androidx.compose.animation.core.FastOutLinearInEasing
-import androidx.compose.animation.core.LinearEasing
-import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.spring
@@ -14,10 +11,12 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -29,13 +28,16 @@ import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -48,8 +50,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.knollsoftware.orienteeringsymbols.R
+import com.knollsoftware.orienteeringsymbols.data.DataSource.groupColor
 import com.knollsoftware.orienteeringsymbols.data.DataSource.symbols
 import com.knollsoftware.orienteeringsymbols.data.Symbol
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
@@ -138,27 +142,29 @@ fun SymbolListItem(
                     )
                 )
         ) {
+
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(dimensionResource(R.dimen.padding_small))
+                    .height(IntrinsicSize.Min)
             ) {
-//                Box(
-//                    modifier = Modifier
-//                        .fillMaxHeight()
-//                        .width(1.dp)
-//                        .background(color = Color.Green)
-//                        .padding(dimensionResource(id = R.dimen.padding_small))
-//                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(3.dp)
+                        .background(color = groupColor[symbol.group] ?: Color.Transparent)
+                )
+                Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.padding_small)))
                 Image(
                     modifier = modifier
-                        .size(dimensionResource(R.dimen.image_size))
-                        .padding(all = dimensionResource(id = R.dimen.padding_small)),
+                        .size(dimensionResource(R.dimen.image_size)),
+//                        .padding(all = dimensionResource(id = R.dimen.padding_small)),
                     contentScale = ContentScale.FillHeight,
                     painter = painterResource(id = symbol.controlImageResourceId),
                     contentDescription = stringResource(id = symbol.name)
                 )
-                Column(modifier = Modifier) {
+                Column(modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_small))) {
                     Text(
                         text = stringResource(id = symbol.name),
                         style = MaterialTheme.typography.titleLarge,
@@ -218,4 +224,19 @@ fun SymbolDescription(
         style = MaterialTheme.typography.bodyLarge,
         modifier = modifier
     )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Preview
+@Composable
+fun ListScreenPreview() {
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    ListScreen(
+        drawerState = drawerState,
+        title = R.string.list,
+        scrollPosition = symbols.first(),
+        highlight = false
+    ) {
+
+    }
 }

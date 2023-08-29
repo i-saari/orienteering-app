@@ -51,7 +51,6 @@ fun GridScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SymbolGridItem(
     symbol: Symbol,

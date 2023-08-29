@@ -1,5 +1,6 @@
 package com.knollsoftware.orienteeringsymbols.data
 
+import androidx.compose.ui.graphics.Color
 import com.knollsoftware.orienteeringsymbols.R
 
 object DataSource {
@@ -138,5 +139,21 @@ object DataSource {
         SpecialInstruction(R.drawable.special7_control, R.string.con_des_S7_body, R.string.con_des_S7_body),
         SpecialInstruction(R.drawable.special8_control, R.string.con_des_S8_body, R.string.con_des_S8_body),
         SpecialInstruction(R.drawable.special9_control, R.string.con_des_S9_body, R.string.con_des_S9_body),
+    )
+
+    val groupColor = mapOf(
+        R.string.landforms to Color(0xFFa35c18),
+        R.string.rock_and_boulder to Color(0xFF474448),
+        R.string.water_and_marsh to Color(0xFF1d74cc),
+        R.string.vegetation to Color(0xFF8CB369),
+        R.string.manmade_feature to Color(0xFFfa4a2a),
+        R.string.prominent_feature to Color(0xFFC200FB),
+        R.string.appearance to Color(0xFF78D5D7),
+        R.string.shape to Color(0xFFF3A712),
+        R.string.differentiator to Color(0xFF0229eb),
+        R.string.location to Color(0xFFde47c7),
+        R.string.dimensions to Color(0xFF2A7F62)
+
+
     )
 }
