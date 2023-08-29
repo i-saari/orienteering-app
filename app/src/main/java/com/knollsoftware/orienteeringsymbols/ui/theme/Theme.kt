@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols.ui.theme
+package com.knollsoftware.orienteeringsymbols.ui.theme
 
 import android.app.Activity
 import android.os.Build

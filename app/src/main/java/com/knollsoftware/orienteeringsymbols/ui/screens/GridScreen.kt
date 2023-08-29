@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols.ui.screens
+package com.knollsoftware.orienteeringsymbols.ui.screens
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.Card
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
@@ -18,11 +17,11 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.orienteeringsymbols.R
-import com.example.orienteeringsymbols.data.DataSource.symbols
-import com.example.orienteeringsymbols.data.Symbol
-import com.example.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
-import com.example.orienteeringsymbols.ui.components.appbar.SymbolsAppBarNoDrawer
+import com.knollsoftware.orienteeringsymbols.R
+import com.knollsoftware.orienteeringsymbols.data.DataSource.symbols
+import com.knollsoftware.orienteeringsymbols.data.Symbol
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBarNoDrawer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

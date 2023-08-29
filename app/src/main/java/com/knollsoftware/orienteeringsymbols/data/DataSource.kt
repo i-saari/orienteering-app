@@ -1,6 +1,6 @@
-package com.example.orienteeringsymbols.data
+package com.knollsoftware.orienteeringsymbols.data
 
-import com.example.orienteeringsymbols.R
+import com.knollsoftware.orienteeringsymbols.R
 
 object DataSource {
     val symbols = listOf(

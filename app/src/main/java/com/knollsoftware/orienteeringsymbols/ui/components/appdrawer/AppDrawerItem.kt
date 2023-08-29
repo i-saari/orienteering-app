@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols.ui.components.appdrawer
+package com.knollsoftware.orienteeringsymbols.ui.components.appdrawer
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -10,13 +10,12 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.orienteeringsymbols.R
+import com.knollsoftware.orienteeringsymbols.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

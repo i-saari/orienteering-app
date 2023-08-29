@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols.ui.components.appbar
+package com.knollsoftware.orienteeringsymbols.ui.components.appbar
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.size
@@ -18,7 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.orienteeringsymbols.R
+import com.knollsoftware.orienteeringsymbols.R
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)

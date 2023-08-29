@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols.ui.theme
+package com.knollsoftware.orienteeringsymbols.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Shapes

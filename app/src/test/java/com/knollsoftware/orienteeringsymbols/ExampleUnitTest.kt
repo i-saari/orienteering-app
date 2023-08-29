@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols
+package com.knollsoftware.orienteeringsymbols
 
 import org.junit.Test
 

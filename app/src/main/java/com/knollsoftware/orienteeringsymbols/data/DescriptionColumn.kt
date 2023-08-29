@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols.data
+package com.knollsoftware.orienteeringsymbols.data
 
 import androidx.annotation.StringRes
 

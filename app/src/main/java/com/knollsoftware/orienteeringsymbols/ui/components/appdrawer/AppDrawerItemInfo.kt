@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols.ui.components.appdrawer
+package com.knollsoftware.orienteeringsymbols.ui.components.appdrawer
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes

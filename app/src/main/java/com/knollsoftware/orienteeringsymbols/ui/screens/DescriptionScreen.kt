@@ -1,4 +1,4 @@
-package com.example.orienteeringsymbols.ui.screens
+package com.knollsoftware.orienteeringsymbols.ui.screens
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
@@ -24,11 +24,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.orienteeringsymbols.R
-import com.example.orienteeringsymbols.data.DataSource.descriptionColumns
-import com.example.orienteeringsymbols.data.DataSource.specialInstructions
-import com.example.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
-import com.example.orienteeringsymbols.ui.components.appbar.SymbolsAppBarNoDrawer
+import com.knollsoftware.orienteeringsymbols.R
+import com.knollsoftware.orienteeringsymbols.data.DataSource.descriptionColumns
+import com.knollsoftware.orienteeringsymbols.data.DataSource.specialInstructions
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBarNoDrawer
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

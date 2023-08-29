@@ -1,9 +1,8 @@
-package com.example.orienteeringsymbols.ui
+package com.knollsoftware.orienteeringsymbols.ui
 
 import androidx.lifecycle.ViewModel
-import com.example.orienteeringsymbols.data.DataSource.symbols
-import com.example.orienteeringsymbols.data.Symbol
-import com.example.orienteeringsymbols.data.SymbolsUiState
+import com.knollsoftware.orienteeringsymbols.data.Symbol
+import com.knollsoftware.orienteeringsymbols.data.SymbolsUiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,5 +18,10 @@ class SymbolsViewModel : ViewModel() {
         }
     }
 
+    fun setHighlight(highlight: Boolean) {
+        _uiState.update { currentState ->
+            currentState.copy(highlight = highlight)
+        }
+    }
 
 }
