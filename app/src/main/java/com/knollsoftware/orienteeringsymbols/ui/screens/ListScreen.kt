@@ -76,9 +76,9 @@ fun ListScreen(
         animationSpec = keyframes {
             durationMillis = animateDuration.toInt()
             baseColor at 0
-            baseColor at 200
-            flashColor at 400
-            baseColor at 600
+            baseColor at (animateDuration * 1 / 3).toInt()
+            flashColor at (animateDuration * 2 / 3).toInt()
+            baseColor at (animateDuration * 3 / 3).toInt()
         }
     )
     Scaffold(
