@@ -19,6 +19,7 @@ import com.knollsoftware.orienteeringsymbols.data.DataSource.symbols
 import com.knollsoftware.orienteeringsymbols.ui.SymbolsViewModel
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerContent
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerItemInfo
+import com.knollsoftware.orienteeringsymbols.ui.screens.AboutScreen
 import com.knollsoftware.orienteeringsymbols.ui.screens.DescriptionScreen
 import com.knollsoftware.orienteeringsymbols.ui.screens.GridScreen
 import com.knollsoftware.orienteeringsymbols.ui.screens.ListScreen
@@ -26,7 +27,8 @@ import com.knollsoftware.orienteeringsymbols.ui.screens.ListScreen
 enum class NavOptions(@StringRes val title: Int){
     List(title = R.string.list),
     Grid(title = R.string.grid),
-    Description(title = R.string.description)
+    Description(title = R.string.description),
+    About(title = R.string.about)
 }
 
 object DrawerParams {
@@ -48,6 +50,12 @@ object DrawerParams {
             R.string.description,
             R.drawable.control_description,
             R.string.drawer_description_description
+        ),
+        AppDrawerItemInfo(
+            NavOptions.About,
+            R.string.about,
+            R.drawable.info,
+            R.string.drawer_about_description
         )
     )
 }
@@ -80,6 +88,11 @@ fun SymbolsApp(
                     NavOptions.Description -> {
                         navController.navigate(route.name) {
                             popUpTo(NavOptions.Description.name)
+                        }
+                    }
+                    NavOptions.About -> {
+                        navController.navigate(route.name) {
+                            popUpTo(NavOptions.About.name)
                         }
                     }
                 }
@@ -118,6 +131,9 @@ fun SymbolsApp(
             }
             composable(route = NavOptions.Description.name) {
                 DescriptionScreen(drawerState = drawerState, title = NavOptions.Description.title)
+            }
+            composable(route = NavOptions.About.name) {
+                AboutScreen(drawerState = drawerState, title = NavOptions.About.title)
             }
         }
     }
