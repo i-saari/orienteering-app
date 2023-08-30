@@ -58,6 +58,19 @@ import com.knollsoftware.orienteeringsymbols.data.Symbol
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
 import kotlinx.coroutines.delay
 
+/**
+ * Composable to build the List screen. Displays a scrollable list of symbols showing the symbol
+ * image, title and group. Clicking a list entry will expand the item to show the symbol
+ * description.
+ *
+ * @param drawerState           state of the navigation drawer
+ * @param title                 title to display in the top app bar
+ * @param scrollPosition        Symbol to automatically scroll to on composition
+ * @param highlight             indicates whether the scrolled to item should flash on composition
+ * @param resetList             action(s) to perform a reset of the ViewModel selected symbol to
+ *                              avoid the list from scrolling and flashing the previously selected
+ *                              item after the user has navigated away
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListScreen(
@@ -67,6 +80,7 @@ fun ListScreen(
     highlight: Boolean,
     resetList: () -> Unit
 ) {
+    // Defines the list item flash animation
     val animateDuration = 600L
     var triggerFlash by remember { mutableStateOf(false) }
     val baseColor = MaterialTheme.colorScheme.surface
@@ -81,6 +95,7 @@ fun ListScreen(
             baseColor at (animateDuration * 3 / 3).toInt()
         }
     )
+
     Scaffold(
         topBar = {
             SymbolsAppBar(
@@ -111,6 +126,8 @@ fun ListScreen(
             }
         }
     }
+
+    // Trigger the list item flash and reset the ViewModel selected symbol
     LaunchedEffect(Unit) {
         triggerFlash = !triggerFlash
         delay(animateDuration)
@@ -118,12 +135,19 @@ fun ListScreen(
     }
 }
 
+/**
+ * Composable of a symbol list item
+ *
+ * @param symbol        Symbol object to display
+ * @param color         color of item background, included to allow flash animation
+ */
 @Composable
 fun SymbolListItem(
     symbol: Symbol,
     color: Color,
     modifier: Modifier = Modifier
 ){
+    // State of list item expansion that displays the symbol description
     var expanded by remember { mutableStateOf(false) }
     Card(
         modifier = modifier
@@ -141,7 +165,6 @@ fun SymbolListItem(
                     )
                 )
         ) {
-
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -158,7 +181,6 @@ fun SymbolListItem(
                 Image(
                     modifier = modifier
                         .size(dimensionResource(R.dimen.image_size)),
-//                        .padding(all = dimensionResource(id = R.dimen.padding_small)),
                     contentScale = ContentScale.FillHeight,
                     painter = painterResource(id = symbol.controlImageResourceId),
                     contentDescription = stringResource(id = symbol.name)
@@ -181,6 +203,7 @@ fun SymbolListItem(
                     onClick = { expanded = !expanded }
                 )
             }
+            // Includes symbol description if list item is expanded
             if (expanded) {
                 SymbolDescription(
                     symbolDescription = symbol.description,
@@ -196,6 +219,12 @@ fun SymbolListItem(
     }
 }
 
+/**
+ * Composable of the list item expansion button
+ *
+ * @param expanded          state of item expansion to display correct button orientation
+ * @param onClick           action to perform when the button is clicked
+ */
 @Composable
 fun SymbolExpandButton(
     expanded: Boolean,
@@ -213,6 +242,11 @@ fun SymbolExpandButton(
     }
 }
 
+/**
+ * Composable of the symbol description to be displayed when list item is expanded
+ *
+ * @param symbolDescription     description text to be displayed
+ */
 @Composable
 fun SymbolDescription(
     @StringRes symbolDescription: Int,

@@ -19,6 +19,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
 
+/**
+ * Composable to build the About screen. The screen simply displays credit text.
+ *
+ * @param drawerState       state of the navigation drawer
+ * @param title             title to display in the top app bar
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(

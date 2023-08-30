@@ -17,15 +17,19 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.knollsoftware.orienteeringsymbols.R
 
+/**
+ * Composable of a navigation drawer entry.
+ *
+ * @param item          navigation option that contains the route, title, icon and description
+ * @param onClick       action to occur when the navigation option is clicked
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T> AppDrawerItem(
     item: AppDrawerItemInfo<T>,
     onClick: (options: T) -> Unit,
-
 ) {
     Surface(
-//        color = MaterialTheme.colorScheme.onPrimary,
         modifier = Modifier
             .width(300.dp)
             .padding(start = dimensionResource(id = R.dimen.padding_medium)),

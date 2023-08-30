@@ -23,8 +23,15 @@ import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.data.DataSource.symbols
 import com.knollsoftware.orienteeringsymbols.data.Symbol
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBarNoDrawer
 
+/**
+ * Composable to build the Grid screen. Displays a scrollable grid of symbol images and lets
+ * the user jump to the symbol entry in the List screen by clicking on a symbol.
+ *
+ * @param drawerState           state of the navigation drawer
+ * @param title                 title to display in the top app bar
+ * @param onGridSymbolClick     action to occur when the symbol is clicked
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GridScreen(
@@ -53,6 +60,12 @@ fun GridScreen(
     }
 }
 
+/**
+ * Composable of an individual symbol to display in the grid
+ *
+ * @param symbol                Symbol option to display
+ * @param onGridSymbolClick     action to occur when the symbol is clicked
+ */
 @Composable
 fun SymbolGridItem(
     symbol: Symbol,

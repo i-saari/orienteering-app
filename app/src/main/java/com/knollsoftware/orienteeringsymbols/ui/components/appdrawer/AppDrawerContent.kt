@@ -23,6 +23,14 @@ import androidx.compose.ui.unit.dp
 import com.knollsoftware.orienteeringsymbols.R
 import kotlinx.coroutines.launch
 
+/**
+ * Composable that creates the layout of the navigation drawer. Includes header image and
+ * navigation options
+ *
+ * @param drawerState       state of the navigation drawer
+ * @param menuItems         list of navigation options
+ * @param onClick           action to occur when the navigation option is clicked
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T : Enum<T>> AppDrawerContent(
@@ -33,6 +41,7 @@ fun <T : Enum<T>> AppDrawerContent(
 ) {
     val coroutineScope = rememberCoroutineScope()
 
+    // Allow users to close drawer with back button
     BackHandler(
         enabled = drawerState.isOpen,
     ) {
@@ -43,7 +52,6 @@ fun <T : Enum<T>> AppDrawerContent(
 
     ModalDrawerSheet(
         drawerShape = RoundedCornerShape(0.dp),
-//        modifier = Modifier.wrapContentWidth()
     ) {
         Surface(
             color = MaterialTheme.colorScheme.background
@@ -58,11 +66,9 @@ fun <T : Enum<T>> AppDrawerContent(
                     contentDescription = stringResource(id = R.string.app_title)
                 )
                 LazyColumn(
-//                    modifier = Modifier.padding(horizontal = dimensionResource(id = R.dimen.padding_medium)),
                     horizontalAlignment = Alignment.Start
                 ) {
                     items(menuItems) { item ->
-//                        val selected = item.drawerOption.name == backStackEntry.value?.destination?.route
                         AppDrawerItem(item = item) { navOption ->
                             coroutineScope.launch {
                                 drawerState.close()

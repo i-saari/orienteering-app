@@ -4,8 +4,9 @@ import androidx.compose.ui.graphics.Color
 import com.knollsoftware.orienteeringsymbols.R
 
 object DataSource {
-    val symbols = listOf(
 
+    //All symbols used in the program are listed here
+    val symbols = listOf(
         Symbol(R.string.landforms, R.drawable.terrace_control, R.string.terrace_name, R.string.terrace_description),
         Symbol(R.string.landforms, R.drawable.spur_control, R.string.spur_name, R.string.spur_description),
         Symbol(R.string.landforms, R.drawable.reentrant_control, R.string.reentrant_name, R.string.reentrant_description),
@@ -118,10 +119,10 @@ object DataSource {
         Symbol(R.string.other, R.drawable.first_aid_control, R.string.first_aid_name, R.string.first_aid_description),
         Symbol(R.string.other, R.drawable.refreshment_control, R.string.refreshment_name, R.string.refreshment_description),
         Symbol(R.string.other, R.drawable.manned_control_control, R.string.manned_control_name, R.string.manned_control_description),
-
-
         )
 
+
+     // Headers and body text of control description columns
     val descriptionColumns = listOf(
         DescriptionColumn(R.string.con_des_A_title, R.string.con_des_A_body),
         DescriptionColumn(R.string.con_des_B_title, R.string.con_des_B_body),
@@ -133,6 +134,7 @@ object DataSource {
         DescriptionColumn(R.string.con_des_H_title, R.string.con_des_H_body),
     )
 
+    // Image, headers and body text of control description special instruction lines
     val specialInstructions = listOf(
         SpecialInstruction(R.drawable.special1_control, R.string.con_des_S1_body, R.string.con_des_S1_body),
         SpecialInstruction(R.drawable.special2_control, R.string.con_des_S2_body, R.string.con_des_S2_body),
@@ -145,6 +147,7 @@ object DataSource {
         SpecialInstruction(R.drawable.special9_control, R.string.con_des_S9_body, R.string.con_des_S9_body),
     )
 
+    // Assign colour to each group for the symbol list colour indicator
     val groupColor = mapOf(
         R.string.landforms to Color(0xFFa35c18),
         R.string.rock_and_boulder to Color(0xFF474448),

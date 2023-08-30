@@ -11,7 +11,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
@@ -21,12 +20,19 @@ import androidx.compose.ui.unit.dp
 import com.knollsoftware.orienteeringsymbols.R
 import kotlinx.coroutines.launch
 
+/**
+ * Composable of the top app bar present in all screens. Contains the screen title,
+ * the drawer navigation button, and any optional action buttons.
+ *
+ * @param drawerState       state of the navigation drawer
+ * @param title             title to display in the top app bar
+ * @param appBarActions     any optional action buttons other than the navigation drawer button
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SymbolsAppBar(
     modifier: Modifier = Modifier,
     drawerState: DrawerState? = null,
-    navigationIcon: (@Composable () -> Unit)? = null,
     @StringRes title: Int? = null,
     appBarActions: List<AppBarAction>? = null
 ) {
@@ -39,27 +45,28 @@ fun SymbolsAppBar(
                     )
                 }
         },
-//        colors = TopAppBarDefaults.mediumTopAppBarColors(
-//            containerColor = MaterialTheme.colorScheme.primaryContainer
-//        ),
+        modifier = modifier,
+        navigationIcon = {
+            drawerState?.let {
+                DrawerIcon(drawerState = drawerState)
+            }
+        },
+        // Creates any action buttons
         actions = {
             appBarActions?.let {
                 for (appBarAction in it) {
                     AppBarAction(appBarAction)
                 }
             }
-        },
-        modifier = modifier,
-        navigationIcon = {
-            if (drawerState != null && navigationIcon == null) {
-                DrawerIcon(drawerState = drawerState)
-            } else {
-                navigationIcon?.invoke()
-            }
         }
     )
 }
 
+/**
+ * Composable of the navigation drawer icon
+ *
+ * @param drawerState       state of the navigation drawer
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun DrawerIcon(drawerState: DrawerState) {
@@ -76,6 +83,11 @@ private fun DrawerIcon(drawerState: DrawerState) {
     }
 }
 
+/**
+ * Composable of a top app bar action button
+ *
+ * @param appBarAction      action button object with icon, description and action
+ */
 @Composable
 fun AppBarAction(appBarAction: AppBarAction) {
     IconButton(onClick = appBarAction.onClick) {
@@ -85,39 +97,4 @@ fun AppBarAction(appBarAction: AppBarAction) {
             contentDescription = stringResource(id = appBarAction.description)
         )
     }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun SymbolsAppBarNoDrawer(
-    modifier: Modifier = Modifier,
-    navigationIcon: (@Composable () -> Unit)? = null,
-    @StringRes title: Int? = null,
-    appBarActions: List<AppBarAction>? = null
-) {
-    TopAppBar(
-        title = {
-            title?.let {
-                Text(
-                    text = stringResource(id = title),
-                    style = MaterialTheme.typography.titleLarge
-                )
-            }
-        },
-        colors = TopAppBarDefaults.mediumTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primaryContainer
-        ),
-        actions = {
-            appBarActions?.let {
-                for (appBarAction in it) {
-                    AppBarAction(appBarAction)
-                }
-            }
-        },
-        modifier = modifier,
-        navigationIcon = {
-            navigationIcon?.invoke()
-        }
-    )
 }

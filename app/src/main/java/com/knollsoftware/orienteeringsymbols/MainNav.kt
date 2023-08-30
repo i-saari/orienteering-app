@@ -24,6 +24,9 @@ import com.knollsoftware.orienteeringsymbols.ui.screens.DescriptionScreen
 import com.knollsoftware.orienteeringsymbols.ui.screens.GridScreen
 import com.knollsoftware.orienteeringsymbols.ui.screens.ListScreen
 
+/**
+ * Available navigation routes with the title to be passed to the app top bar
+ */
 enum class NavOptions(@StringRes val title: Int){
     List(title = R.string.list),
     Grid(title = R.string.grid),
@@ -31,6 +34,9 @@ enum class NavOptions(@StringRes val title: Int){
     About(title = R.string.about)
 }
 
+/**
+ * Contains a list of navigation options to populate the navigation drawer
+ */
 object DrawerParams {
     val drawerButtons = arrayListOf(
         AppDrawerItemInfo(
@@ -60,6 +66,14 @@ object DrawerParams {
     )
 }
 
+/**
+ * Main composable run at startup. Provides the foundation for the app. The navigation drawer is
+ * the parent composable of the app, with the screens built within it.
+ *
+ * @param viewModel             ViewModel used to store UI details between screens
+ * @param navController         navigation controller for switching screens
+ * @param drawerState           state of the navigation drawer
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SymbolsApp(
@@ -74,6 +88,7 @@ fun SymbolsApp(
                 drawerState = drawerState,
                 menuItems = DrawerParams.drawerButtons,
             ) { route ->
+                // actions performed when the user clicks the drawer navigation options
                 when(route) {
                     NavOptions.List -> {
                         navController.navigate(route.name) {
@@ -113,6 +128,9 @@ fun SymbolsApp(
                     scrollPosition = uiState.symbol,
                     highlight = uiState.highlight,
                     resetList = {
+                        /* reset the selected symbol to the top of the list after flashing the item
+                        so that it won't flash again if the user navigates away and then back
+                        */
                         viewModel.setHighlight(false)
                         viewModel.setSymbol(symbols.first())
                     }

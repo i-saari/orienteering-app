@@ -30,8 +30,14 @@ import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.data.DataSource.descriptionColumns
 import com.knollsoftware.orienteeringsymbols.data.DataSource.specialInstructions
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBarNoDrawer
 
+/**
+ * Composable to build the Control Description screen. The screen displays text and images
+ * describing how to read a control description.
+ *
+ * @param drawerState       state of the navigation drawer
+ * @param title             title to display in the top app bar
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DescriptionScreen(
