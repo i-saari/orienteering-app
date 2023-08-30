@@ -78,6 +78,11 @@ object DataSource {
         Symbol(R.string.manmade_feature, R.drawable.out_of_bounds_control, R.string.out_of_bounds_name, R.string.out_of_bounds_description),
         Symbol(R.string.prominent_feature, R.drawable.prominent_feature_x_control, R.string.prominent_feature_x_name, R.string.prominent_feature_x_description),
         Symbol(R.string.prominent_feature, R.drawable.prominent_feature_o_control, R.string.prominent_feature_o_name, R.string.prominent_feature_o_description),
+        Symbol(R.string.differentiator, R.drawable.northern_control, R.string.northern_name, R.string.northern_description),
+        Symbol(R.string.differentiator, R.drawable.south_eastern_control, R.string.south_eastern_name, R.string.south_eastern_description),
+        Symbol(R.string.differentiator, R.drawable.upper_control, R.string.upper_name, R.string.upper_description),
+        Symbol(R.string.differentiator, R.drawable.lower_control, R.string.lower_name, R.string.lower_description),
+        Symbol(R.string.differentiator, R.drawable.middle_control, R.string.middle_name, R.string.middle_description),
         Symbol(R.string.appearance, R.drawable.low_control, R.string.low_name, R.string.low_description),
         Symbol(R.string.appearance, R.drawable.shallow_control, R.string.shallow_name, R.string.shallow_description),
         Symbol(R.string.appearance, R.drawable.deep_control, R.string.deep_name, R.string.deep_description),
@@ -89,14 +94,13 @@ object DataSource {
         Symbol(R.string.appearance, R.drawable.needle_leaved_control, R.string.needle_leaved_name, R.string.needle_leaved_description),
         Symbol(R.string.appearance, R.drawable.broad_leaved_control, R.string.broad_leaved_name, R.string.broad_leaved_description),
         Symbol(R.string.appearance, R.drawable.ruined_control, R.string.ruined_name, R.string.ruined_description),
-        Symbol(R.string.shape, R.drawable.crossing_control, R.string.crossing_name, R.string.crossing_description),
-        Symbol(R.string.shape, R.drawable.junction_control, R.string.junction_name, R.string.junction_description),
-        Symbol(R.string.shape, R.drawable.bend_control, R.string.bend_name, R.string.bend_description),
-        Symbol(R.string.differentiator, R.drawable.northern_control, R.string.northern_name, R.string.northern_description),
-        Symbol(R.string.differentiator, R.drawable.south_eastern_control, R.string.south_eastern_name, R.string.south_eastern_description),
-        Symbol(R.string.differentiator, R.drawable.upper_control, R.string.upper_name, R.string.upper_description),
-        Symbol(R.string.differentiator, R.drawable.lower_control, R.string.lower_name, R.string.lower_description),
-        Symbol(R.string.differentiator, R.drawable.middle_control, R.string.middle_name, R.string.middle_description),
+        Symbol(R.string.dimensions, R.drawable.height_or_depth_control, R.string.height_or_depth_name, R.string.height_or_depth_description),
+        Symbol(R.string.dimensions, R.drawable.height_on_slope_control, R.string.height_on_slope_name, R.string.height_on_slope_description),
+        Symbol(R.string.dimensions, R.drawable.size_control, R.string.size_name, R.string.size_description),
+        Symbol(R.string.dimensions, R.drawable.height_two_features_control, R.string.height_two_features_name, R.string.height_two_features_description),
+        Symbol(R.string.dimensions, R.drawable.crossing_control, R.string.crossing_name, R.string.crossing_description),
+        Symbol(R.string.dimensions, R.drawable.junction_control, R.string.junction_name, R.string.junction_description),
+        Symbol(R.string.dimensions, R.drawable.bend_control, R.string.bend_name, R.string.bend_description),
         Symbol(R.string.location, R.drawable.north_east_side_control, R.string.north_east_side_name, R.string.north_east_side_description),
         Symbol(R.string.location, R.drawable.south_east_edge_control, R.string.south_east_edge_name, R.string.south_east_edge_description),
         Symbol(R.string.location, R.drawable.west_part_control, R.string.west_part_name, R.string.west_part_description),
@@ -111,10 +115,10 @@ object DataSource {
         Symbol(R.string.location, R.drawable.north_east_foot_control, R.string.north_east_foot_name, R.string.north_east_foot_description),
         Symbol(R.string.location, R.drawable.beneath_control, R.string.beneath_name, R.string.beneath_description),
         Symbol(R.string.location, R.drawable.between_control, R.string.between_name, R.string.between_description),
-        Symbol(R.string.dimensions, R.drawable.height_or_depth_control, R.string.height_or_depth_name, R.string.height_or_depth_description),
-        Symbol(R.string.dimensions, R.drawable.height_on_slope_control, R.string.height_on_slope_name, R.string.height_on_slope_description),
-        Symbol(R.string.dimensions, R.drawable.size_control, R.string.size_name, R.string.size_description),
-        Symbol(R.string.dimensions, R.drawable.height_two_features_control, R.string.height_two_features_name, R.string.height_two_features_description),
+        Symbol(R.string.other, R.drawable.first_aid_control, R.string.first_aid_name, R.string.first_aid_description),
+        Symbol(R.string.other, R.drawable.refreshment_control, R.string.refreshment_name, R.string.refreshment_description),
+        Symbol(R.string.other, R.drawable.manned_control_control, R.string.manned_control_name, R.string.manned_control_description),
+
 
         )
 
@@ -147,12 +151,12 @@ object DataSource {
         R.string.water_and_marsh to Color(0xFF1d74cc),
         R.string.vegetation to Color(0xFF8CB369),
         R.string.manmade_feature to Color(0xFFfa4a2a),
-        R.string.prominent_feature to Color(0xFFC200FB),
-        R.string.appearance to Color(0xFF78D5D7),
-        R.string.shape to Color(0xFFF3A712),
-        R.string.differentiator to Color(0xFF0229eb),
-        R.string.location to Color(0xFFde47c7),
-        R.string.dimensions to Color(0xFF2A7F62)
+        R.string.prominent_feature to Color(0xFF0229eb),
+        R.string.differentiator to Color(0xFFde47c7),
+        R.string.appearance to Color(0xFF2A7F62),
+        R.string.dimensions to Color(0xFFF3A712),
+        R.string.location to Color(0xFF49f2ea),
+        R.string.other to Color(0xFFC200FB)
 
 
     )

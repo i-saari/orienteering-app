@@ -7,7 +7,8 @@
     <string name="drawer_grid_description">Grid navigation button</string>
     <string name="description">Control Description</string>
     <string name="drawer_description_description">Control description button</string>
-    <string name="back_button">Back</string>
+    <string name="about">About</string>
+    <string name="drawer_about_description">About navigation button</string>
     <string name="drawer_icon_description">Menu navigation button</string>
     <string name="expand_button_content_description">See symbol description</string>
     <string name="example_control_description">Example Control Description</string>
@@ -20,10 +21,11 @@
     <string name="manmade_feature">Man-made Feature</string>
     <string name="appearance">Appearance</string>
     <string name="location">Location</string>
-    <string name="differentiator">Differentiator</string>
-    <string name="prominent_feature">Prominent Feature</string>
+    <string name="differentiator">Which Feature</string>
+    <string name="prominent_feature">Special Feature</string>
     <string name="shape">Shape</string>
-    <string name="dimensions">Dimensions</string>
+    <string name="dimensions">Dimension/Combination</string>
+    <string name="other">Other Information</string>
 
     <string name="ant_hill_name">Ant Hill (termite mound)</string>
     <string name="bare_rock_name">Bare Rock</string>
@@ -287,5 +289,7 @@
     <string name="con_des_S8_body">130m from last control to Finish. Navigate to finish funnel, then follow tapes.</string>
     <string name="con_des_S9_body">220m from last control to Finish. Navigate to finish. No tapes.</string>
 
+    <string name="instruction_body"></string>
+    <string name="credit_body"></string>
 
 </resources>
