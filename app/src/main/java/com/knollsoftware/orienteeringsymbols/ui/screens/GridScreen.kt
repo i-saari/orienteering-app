@@ -8,8 +8,10 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -66,32 +68,9 @@ fun SymbolGridItem(
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun GridScreenNoDrawer(
-    @StringRes title: Int
-) {
-    Scaffold(
-        topBar = {
-            SymbolsAppBarNoDrawer(
-                title = title
-            ) }
-    ) {innerPadding ->
-        LazyVerticalGrid(
-            modifier = Modifier.padding(innerPadding),
-            columns = GridCells.Adaptive(minSize = dimensionResource(id = R.dimen.image_size))
-        ) {
-            items(symbols) {
-                SymbolGridItem(
-                    symbol = it,
-                    onGridSymbolClick = {}
-                )
-            }
-        }
-    }
-}
-
 @Preview
 @Composable
 fun SymbolGridPreview(){
-    GridScreenNoDrawer(title = R.string.list)
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    GridScreen(drawerState = drawerState, title = R.string.list, onGridSymbolClick = {})
 }
