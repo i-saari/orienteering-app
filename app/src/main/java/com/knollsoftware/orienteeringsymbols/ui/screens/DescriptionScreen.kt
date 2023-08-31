@@ -82,7 +82,7 @@ fun DescriptionScreen(
                     horizontalAlignment = Alignment.Start
                 ) {
                     Text(
-                        text = stringResource(id = R.string.description),
+                        text = stringResource(id = R.string.con_des_columns_description),
                         style = MaterialTheme.typography.titleLarge,
                         modifier = Modifier.padding(dimensionResource(id = R.dimen.padding_small))
                     )
