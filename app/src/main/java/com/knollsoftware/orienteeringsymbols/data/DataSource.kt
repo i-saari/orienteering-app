@@ -149,17 +149,29 @@ object DataSource {
 
     // Assign colour to each group for the symbol list colour indicator
     val groupColor = mapOf(
-        R.string.landforms to Color(0xFFa35c18),
-        R.string.rock_and_boulder to Color(0xFF474448),
-        R.string.water_and_marsh to Color(0xFF1d74cc),
-        R.string.vegetation to Color(0xFF8CB369),
-        R.string.manmade_feature to Color(0xFFfa4a2a),
-        R.string.prominent_feature to Color(0xFF0229eb),
-        R.string.differentiator to Color(0xFFde47c7),
-        R.string.appearance to Color(0xFF2A7F62),
-        R.string.dimensions to Color(0xFFF3A712),
-        R.string.location to Color(0xFF49f2ea),
-        R.string.other to Color(0xFFC200FB)
+        R.string.landforms to Color(0xFFa05a00),
+        R.string.rock_and_boulder to Color(0xFF8e8e94),
+        R.string.water_and_marsh to Color(0xFF007aff),
+        R.string.vegetation to Color(0xFF28cd41),
+        R.string.manmade_feature to Color(0xFFff3b30),
+        R.string.prominent_feature to Color(0xFF5856d6),
+        R.string.differentiator to Color(0xFFff9500),
+        R.string.appearance to Color(0xFFaf52de),
+        R.string.dimensions to Color(0xFFffcc00),
+        R.string.location to Color(0xFFff6482),
+        R.string.other to Color(0xFF59adc4)
+
+//        R.string.landforms to Color(0xFFa35c18),
+//        R.string.rock_and_boulder to Color(0xFF474448),
+//        R.string.water_and_marsh to Color(0xFF1d74cc),
+//        R.string.vegetation to Color(0xFF8CB369),
+//        R.string.manmade_feature to Color(0xFFff3b30),
+//        R.string.prominent_feature to Color(0xFF0229eb),
+//        R.string.differentiator to Color(0xFFde47c7),
+//        R.string.appearance to Color(0xFF2A7F62),
+//        R.string.dimensions to Color(0xFFF3A712),
+//        R.string.location to Color(0xFF49f2ea),
+//        R.string.other to Color(0xFFC200FB)
 
 
     )
