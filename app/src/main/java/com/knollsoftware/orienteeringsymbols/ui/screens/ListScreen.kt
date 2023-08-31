@@ -171,6 +171,7 @@ fun SymbolListItem(
                     .padding(dimensionResource(R.dimen.padding_small))
                     .height(IntrinsicSize.Min)
             ) {
+                // box used to build coloured vertical line
                 Box(
                     modifier = Modifier
                         .fillMaxHeight()
@@ -189,7 +190,7 @@ fun SymbolListItem(
                     Text(
                         text = stringResource(id = symbol.name),
                         style = MaterialTheme.typography.titleLarge,
-                        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_small))
+//                        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_small))
                     )
                     Text(
                         text = stringResource(id = symbol.group),
