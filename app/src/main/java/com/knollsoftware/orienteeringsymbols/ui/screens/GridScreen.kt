@@ -32,7 +32,6 @@ import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
  * @param title                 title to display in the top app bar
  * @param onGridSymbolClick     action to occur when the symbol is clicked
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun GridScreen(
     drawerState: DrawerState,
@@ -80,7 +79,6 @@ fun SymbolGridItem(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun SymbolGridPreview(){

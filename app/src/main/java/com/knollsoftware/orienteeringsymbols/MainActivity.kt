@@ -9,7 +9,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.knollsoftware.orienteeringsymbols.ui.theme.OrienteeringSymbolsTheme
 
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -20,7 +19,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun SymbolsAppPreview() {

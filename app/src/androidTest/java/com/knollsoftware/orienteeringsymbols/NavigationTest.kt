@@ -19,7 +19,6 @@ class NavigationTest {
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private lateinit var navController: TestNavHostController
 
-    @OptIn(ExperimentalMaterial3Api::class)
     @Before
     fun setupCupcakeNavHost() {
         composeTestRule.setContent {

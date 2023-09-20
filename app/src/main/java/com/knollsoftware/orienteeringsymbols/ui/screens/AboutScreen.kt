@@ -25,7 +25,6 @@ import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
  * @param drawerState       state of the navigation drawer
  * @param title             title to display in the top app bar
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutScreen(
     drawerState: DrawerState,
@@ -53,7 +52,6 @@ fun AboutScreen(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun AboutScreenPreview() {

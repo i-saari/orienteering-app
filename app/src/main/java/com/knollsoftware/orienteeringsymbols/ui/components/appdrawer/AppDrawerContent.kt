@@ -31,7 +31,6 @@ import kotlinx.coroutines.launch
  * @param menuItems         list of navigation options
  * @param onClick           action to occur when the navigation option is clicked
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T : Enum<T>> AppDrawerContent(
     modifier: Modifier = Modifier,

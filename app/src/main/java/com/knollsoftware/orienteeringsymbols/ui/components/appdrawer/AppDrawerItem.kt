@@ -23,7 +23,6 @@ import com.knollsoftware.orienteeringsymbols.R
  * @param item          navigation option that contains the route, title, icon and description
  * @param onClick       action to occur when the navigation option is clicked
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun <T> AppDrawerItem(
     item: AppDrawerItemInfo<T>,

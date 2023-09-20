@@ -74,7 +74,6 @@ object DrawerParams {
  * @param navController         navigation controller for switching screens
  * @param drawerState           state of the navigation drawer
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SymbolsApp(
     viewModel: SymbolsViewModel = viewModel(),
