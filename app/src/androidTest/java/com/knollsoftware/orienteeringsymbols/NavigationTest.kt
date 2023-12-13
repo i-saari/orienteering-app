@@ -1,7 +1,6 @@
 package com.knollsoftware.orienteeringsymbols
 
 import androidx.activity.ComponentActivity
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
@@ -19,7 +18,6 @@ class NavigationTest {
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
     private lateinit var navController: TestNavHostController
 
-    @OptIn(ExperimentalMaterial3Api::class)
     @Before
     fun setupCupcakeNavHost() {
         composeTestRule.setContent {

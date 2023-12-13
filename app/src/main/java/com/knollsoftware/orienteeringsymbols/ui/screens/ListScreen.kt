@@ -30,7 +30,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -71,7 +70,6 @@ import kotlinx.coroutines.delay
  *                              avoid the list from scrolling and flashing the previously selected
  *                              item after the user has navigated away
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ListScreen(
     drawerState: DrawerState,
@@ -260,7 +258,6 @@ fun SymbolDescription(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun ListScreenPreview() {

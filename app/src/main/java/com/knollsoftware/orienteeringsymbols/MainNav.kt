@@ -3,7 +3,6 @@ package com.knollsoftware.orienteeringsymbols
 import androidx.annotation.StringRes
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
@@ -74,7 +73,6 @@ object DrawerParams {
  * @param navController         navigation controller for switching screens
  * @param drawerState           state of the navigation drawer
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SymbolsApp(
     viewModel: SymbolsViewModel = viewModel(),

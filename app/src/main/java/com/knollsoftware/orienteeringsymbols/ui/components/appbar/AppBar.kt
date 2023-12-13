@@ -67,7 +67,6 @@ fun SymbolsAppBar(
  *
  * @param drawerState       state of the navigation drawer
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun DrawerIcon(drawerState: DrawerState) {
     val coroutineScope = rememberCoroutineScope()
