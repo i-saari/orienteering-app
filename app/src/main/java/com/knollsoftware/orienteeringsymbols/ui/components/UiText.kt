@@ -1,4 +1,4 @@
-package com.knollsoftware.orienteeringsymbols
+package com.knollsoftware.orienteeringsymbols.ui.components
 
 import android.content.Context
 import androidx.annotation.StringRes

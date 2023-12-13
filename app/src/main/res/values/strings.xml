@@ -13,6 +13,7 @@
     <string name="expand_button_content_description">See symbol description</string>
     <string name="example_control_description">Example Control Description</string>
     <string name="example_control_description_labeled">Example Labeled Control Description</string>
+    <string name="search">Search</string>
 
     <string name="landforms">Landforms</string>
     <string name="rock_and_boulder">Rock and Boulder</string>
