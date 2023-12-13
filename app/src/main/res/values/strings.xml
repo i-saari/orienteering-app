@@ -11,7 +11,6 @@
     <string name="drawer_about_description">About navigation button</string>
     <string name="drawer_icon_description">Menu navigation button</string>
     <string name="expand_button_content_description">See symbol description</string>
-    <string name="example_control_description">Example Control Description</string>
     <string name="example_control_description_labeled">Example Labeled Control Description</string>
 
     <string name="landforms">Landforms</string>
@@ -23,7 +22,6 @@
     <string name="location">Location</string>
     <string name="differentiator">Which Feature</string>
     <string name="prominent_feature">Special Feature</string>
-    <string name="shape">Shape</string>
     <string name="dimensions">Dimension/Combination</string>
     <string name="other">Other Information</string>
 
@@ -39,7 +37,6 @@
     <string name="broad_leaved_name">Broad Leaved</string>
     <string name="broken_ground_name">Broken Ground</string>
     <string name="building_name">Building</string>
-    <string name="building_pass_through_name">Building Pass Through</string>
     <string name="cairn_name">Cairn, Boundary Stone</string>
     <string name="canopy_name">Canopy</string>
     <string name="cave_name">Cave</string>
@@ -169,7 +166,7 @@
     <string name="ditch_description">A natural or man made minor water channel which may contain water only intermittently.</string>
     <string name="earth_bank_description">An abrupt change in ground level which can clearly be distinguished from its surroundings.</string>
     <string name="earth_wall_description">A narrow wall of earth projecting above the surrounding terrain; may be partially stone faced, usually man-made.</string>
-    <string name="east_inside_corner_description">Used where:\n\na) The edge of a feature turns through an angle of 45-135 degrees; e.g. Open land, east corner (inside).\n\nb) A linear feature turns a corner; e.g. Fence, south corner (inside).\n\nNote: The side of a building may be treated as a linear feature and hence “building, east corner (inside)” does not mean “inside the building”. \n\nThe orientation of the symbol indicates the direction in which the corner points.</string>
+    <string name="east_inside_corner_description">Used where:\n\na) The edge of a feature turns through an angle of 45–135 degrees; e.g. Open land, east corner (inside).\n\nb) A linear feature turns a corner; e.g. Fence, south corner (inside).\n\nNote: The side of a building may be treated as a linear feature and hence “building, east corner (inside)” does not mean “inside the building”. \n\nThe orientation of the symbol indicates the direction in which the corner points.</string>
     <string name="erosion_gully_description">An erosion gully or trench, normally dry.</string>
     <string name="fence_description">A wire or wooden boundary. Used with the Ruined symbol to indicate a ruined fence.</string>
     <string name="firm_ground_in_marsh_description">A non-marshy area within a marsh, or between two marshes.</string>
@@ -231,7 +228,7 @@
     <string name="small_erosion_gully_description">A small erosion gully or trench, normally dry. </string>
     <string name="south_east_edge_description">Used where:\n\na) The feature extends down from the surface of the surrounding ground and the control is situated on the edge at ground level; e.g. Depression, south east edge.\n\nb) The feature extends over a significant area and the control is situated on the border of that area; e.g. Marsh, west edge; Clearing, north west edge.</string>
     <string name="south_eastern_description">The more south eastern of two similar features, or the south-eastern-most of several similar features.</string>
-    <string name="south_outside_corner_description">Used where:\n\na) The edge of a feature turns through an angle of 45-135 degrees; e.g. Ruin, north west corner (outside).\n\nb) A linear feature turns a corner; e.g. Stone wall, south west corner (outside).\n\nThe orientation of the symbol indicates the direction in which the corner points.</string>
+    <string name="south_outside_corner_description">Used where:\n\na) The edge of a feature turns through an angle of 45–135 degrees; e.g. Ruin, north west corner (outside).\n\nb) A linear feature turns a corner; e.g. Stone wall, south west corner (outside).\n\nThe orientation of the symbol indicates the direction in which the corner points.</string>
     <string name="south_west_tip_description">Used where the edge of a feature turns through an angle of less than 45 degrees; e.g. Marsh, south west tip.</string>
     <string name="spring_description">The source of a watercourse with a distinct outflow.</string>
     <string name="spur_description">A contour projection or “nose” rising from the surrounding ground.</string>
