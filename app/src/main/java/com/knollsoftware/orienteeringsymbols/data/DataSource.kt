@@ -161,18 +161,5 @@ object DataSource {
         R.string.location to Color(0xFFff6482),
         R.string.other to Color(0xFF59adc4)
 
-//        R.string.landforms to Color(0xFFa35c18),
-//        R.string.rock_and_boulder to Color(0xFF474448),
-//        R.string.water_and_marsh to Color(0xFF1d74cc),
-//        R.string.vegetation to Color(0xFF8CB369),
-//        R.string.manmade_feature to Color(0xFFff3b30),
-//        R.string.prominent_feature to Color(0xFF0229eb),
-//        R.string.differentiator to Color(0xFFde47c7),
-//        R.string.appearance to Color(0xFF2A7F62),
-//        R.string.dimensions to Color(0xFFF3A712),
-//        R.string.location to Color(0xFF49f2ea),
-//        R.string.other to Color(0xFFC200FB)
-
-
     )
 }
