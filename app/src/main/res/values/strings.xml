@@ -201,7 +201,7 @@
     <string name="path_description">A visible route made by people or animals. Tracks may be driven by rugged vehicles.</string>
     <string name="paved_area_description">An area of hard standing used for parking or other purposes.</string>
     <string name="pipeline_description">A prominent line feature such as a pipeline (gas, water, oil, etc.) or a bobsleigh/skeleton track which is above ground level.</string>
-    <string name="pit_description">A pit or hole with distinct steep-sides. Usually man made. Used with symbol 8.6 to indicate a rocky pit.</string>
+    <string name="pit_description">A pit or hole with distinct steep-sides. Usually man made. Used with the Rocky symbol to indicate a rocky pit.</string>
     <string name="pond_description">A small area of water, may be shallow or seasonal.</string>
     <string name="power_line_description">A power or telephone line, cableway or ski lift.</string>
     <string name="power_line_pylon_description">A support for power or telephone line, cableway or ski lift.</string>
