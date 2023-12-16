@@ -283,8 +283,8 @@
     <string name="con_des_S5_body">Mandatory passage through out of bounds area.</string>
     <string name="con_des_S6_body">Follow Taped Route, 60m to Map Exchange.</string>
     <string name="con_des_S7_body">170m from last control to Finish. Follow taped route. </string>
-    <string name="con_des_S8_body">130m from last control to Finish. Navigate to finish funnel, then follow tapes.</string>
-    <string name="con_des_S9_body">220m from last control to Finish. Navigate to finish. No tapes.</string>
+    <string name="con_des_S8_body">130m from last control to Finish. Navigate to finish funnel, then follow tape.</string>
+    <string name="con_des_S9_body">220m from last control to Finish. Navigate to finish. No tape.</string>
 
     <string name="credit_body">Control description information is from the International Orienteering Federation (IOF) International Specification for Control Descriptions – 2018. Further information can be found at http://www.orienteering.org.</string>
 
