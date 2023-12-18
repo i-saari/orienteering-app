@@ -1,5 +1,5 @@
 # Orienteering Symbols
-A simple reference for orienteering control description symbols and definitions.
+A simple Android app for referencing orienteering control description symbols and definitions.
 
 ## How to install?
 
