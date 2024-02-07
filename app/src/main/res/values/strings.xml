@@ -255,17 +255,17 @@
     <string name="height_on_slope_description">Height of the feature on a slope in metres.</string>
     <string name="height_two_features_description">Heights of two features with the control between them.</string>
 
-    <string name="con_des_intro">The control description sheet lists details of the course and of each control. Each control description is intended to provide details of the flagged feature which are not provided by the map, and to distinguish where the control is placed in relation to the feature.\n\nA sample control description sheet is shown below.</string>
+    <string name="con_des_intro">The control description sheet lists details of the course and of each control. Each control description is intended to provide details of the flagged feature which are not provided by the map, and to distinguish where the flag has been placed in relation to the feature.\n\nA sample control description sheet is shown below.</string>
     <string name="con_des_columns">Each column of a control description provides details on a particular aspect of the control or feature.</string>
     <string name="con_des_columns_description">Control Description Columns</string>
     <string name="con_des_A_title">Column A - Control number</string>
     <string name="con_des_A_body">Numbering of controls is in the sequence they are to be visited, unless the description is for a Score competition in which case this column is usually either left blank or indicates the control value.</string>
     <string name="con_des_B_title">Column B – Control code</string>
-    <string name="con_des_B_body">The control code should be a number greater than 30.</string>
+    <string name="con_des_B_body">The control code is the two or three digit number which uniquely identifies the control. The code is labeled on the control flag.</string>
     <string name="con_des_C_title">Column C – Which of any similar feature</string>
     <string name="con_des_C_body">This column may be used when there is more than one similar feature within the control circle; e.g. south eastern.</string>
     <string name="con_des_D_title">Column D – Control feature</string>
-    <string name="con_des_D_body">The feature, as shown on the map, at the centre of the circle defining the control site; e.g. clearing; boulder. Most of these are cross referenced to the ISOM 2017 (International Specification for Orienteering Maps) symbol used to represent them.</string>
+    <string name="con_des_D_body">The feature, as shown on the map, at the centre of the circle defining the control site; e.g. clearing; boulder.</string>
     <string name="con_des_E_title">Column E – Appearance</string>
     <string name="con_des_E_body">Further information on the nature of the feature if it is required; e.g. overgrown; ruined. In certain circumstances also used for a second control feature where the description requires this i.e. crossing; junction; between.</string>
     <string name="con_des_F_title">Column F – Dimensions / Combinations / Bend</string>
