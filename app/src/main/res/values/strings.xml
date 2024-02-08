@@ -94,6 +94,7 @@
     <string name="prominent_feature_x_name">Prominent Feature</string>
     <string name="prominent_tree_name">Prominent Tree</string>
     <string name="quarry_name">Quarry</string>
+    <string name="railway_name">Railway</string>
     <string name="reentrant_name">Re-entrant</string>
     <string name="refreshment_name">Refreshment Point</string>
     <string name="ride_name">Ride</string>
@@ -143,7 +144,7 @@
     <string name="ant_hill_description">The mound made by ants or termites.</string>
     <string name="bare_rock_description">A runnable area of rock with no earth or vegetation cover. </string>
     <string name="bend_description">Used where a linear feature makes a smooth change of direction; e.g. Path bend; River bend.</string>
-    <string name="beneath_description">Where the control is located underneath the feature; e.g. Pipeline, beneath.</string>
+    <string name="beneath_description">Where the control is located underneath the feature; e.g. Pipeline, beneath. The lower of two levels.</string>
     <string name="between_description">Where the control is located between two features; e.g. Between thickets; Between boulder and knoll.</string>
     <string name="boulder_cluster_description">A small distinct group of boulders so closely clustered together that they cannot be individually mapped.</string>
     <string name="boulder_description">A prominent free-standing block of rock or stone.</string>
@@ -151,14 +152,14 @@
     <string name="bridge_description">A crossing point over a watercourse or other linear feature.</string>
     <string name="broad_leaved_description">Where the tree or trees associated with the control feature are broad-leaved; e.g. Copse, broad leaved.</string>
     <string name="broken_ground_description">Clearly disturbed ground with features too small or too numerous to be mapped individually; including animal earths.</string>
-    <string name="building_description">A standing brick, wood or stone structure.</string>
+    <string name="building_description">A man-made structure. Typically of brick, wood or stone. A pillar supporting a roof.</string>
     <string name="cairn_description">A man made stone or pile of stones. A cairn, memorial stone, boundary stone or trigonometric point.</string>
     <string name="canopy_description">An accessible area with a roof. A canopy or a covered passageway through a building. </string>
     <string name="cave_description">A hole in a rock face or hill side, often leading to underground workings.</string>
     <string name="charcoal_burner_description">The clear remains of an area where charcoal was burned. \n\nA small level man made area on a slope (a platform).</string>
     <string name="clearing_description">A small area of land free from trees within the forest.</string>
     <string name="cliff_description">A cliff or rock face. May be passable or impassable.</string>
-    <string name="copse_description">A small area of trees in open ground.</string>
+    <string name="copse_description">A small area of trees in open ground or a more runnable area of trees surrounded by thicker forest.</string>
     <string name="crossing_description">The point at which two linear features cross.</string>
     <string name="crossing_point_description">A way through or over a wall, fence, or other linear feature, including a gate or stile.</string>
     <string name="deep_description">Where the control feature is particularly deep but this is not indicated on the map; e.g. Pit, deep.</string>
@@ -209,6 +210,7 @@
     <string name="prominent_feature_x_description">If used, an explanation of its meaning must be supplied to competitors in the pre-race information.</string>
     <string name="prominent_tree_description">An unusual or prominent tree in either open land or forest; frequently information is also given as to its type.</string>
     <string name="quarry_description">Gravel, sand or stone working in flat or inclined ground.</string>
+    <string name="railway_description">A railway, tramway, or other kind of railed track.</string>
     <string name="reentrant_description">A contour indentation; a valley; the opposite of a spur.</string>
     <string name="refreshment_description">Control site where Refreshments are available.</string>
     <string name="ride_description">A forest ride or a prominent trace through the terrain which does not have a distinct runnable path along it.</string>
@@ -236,7 +238,7 @@
     <string name="stony_ground_description">An area covered with many small stones or rocks.</string>
     <string name="terrace_description">A level area on a slope.</string>
     <string name="thicket_description">A small area of forest where the tree cover or undergrowth is so dense that it is difficult to pass. May also be used for an individual bush (typically in Sprint competitions).</string>
-    <string name="top_description">Where the control is located at the highest point of the feature and this is not the default location; e.g. Cliff, top; Stairway, top.</string>
+    <string name="top_description">Where the control is located at the highest point of the feature and this is not the default location; e.g. Cliff, top; Stairway, top. The upper of two levels.</string>
     <string name="tower_description">A metal, wooden or brick tower or pylon.</string>
     <string name="trench_description">A rocky or artificial trench.</string>
     <string name="tunnel_description">A way under roads, railways, etc.</string>
@@ -253,17 +255,17 @@
     <string name="height_on_slope_description">Height of the feature on a slope in metres.</string>
     <string name="height_two_features_description">Heights of two features with the control between them.</string>
 
-    <string name="con_des_intro">The control description sheet lists details of the course and of each control. Each control description is intended to provide details of the flagged feature which are not provided by the map, and to distinguish where the control is placed in relation to the feature.\n\nA sample control description sheet is shown below.</string>
+    <string name="con_des_intro">The control description sheet lists details of the course and of each control. Each control description is intended to provide details of the flagged feature which are not provided by the map, and to distinguish where the flag has been placed in relation to the feature.\n\nA sample control description sheet is shown below.</string>
     <string name="con_des_columns">Each column of a control description provides details on a particular aspect of the control or feature.</string>
     <string name="con_des_columns_description">Control Description Columns</string>
     <string name="con_des_A_title">Column A - Control number</string>
     <string name="con_des_A_body">Numbering of controls is in the sequence they are to be visited, unless the description is for a Score competition in which case this column is usually either left blank or indicates the control value.</string>
     <string name="con_des_B_title">Column B – Control code</string>
-    <string name="con_des_B_body">The control code should be a number greater than 30.</string>
+    <string name="con_des_B_body">The control code is the two or three digit number which uniquely identifies the control. The code is labeled on the control flag.</string>
     <string name="con_des_C_title">Column C – Which of any similar feature</string>
     <string name="con_des_C_body">This column may be used when there is more than one similar feature within the control circle; e.g. south eastern.</string>
     <string name="con_des_D_title">Column D – Control feature</string>
-    <string name="con_des_D_body">The feature, as shown on the map, at the centre of the circle defining the control site; e.g. clearing; boulder. Most of these are cross referenced to the ISOM 2017 (International Specification for Orienteering Maps) symbol used to represent them.</string>
+    <string name="con_des_D_body">The feature, as shown on the map, at the centre of the circle defining the control site; e.g. clearing; boulder.</string>
     <string name="con_des_E_title">Column E – Appearance</string>
     <string name="con_des_E_body">Further information on the nature of the feature if it is required; e.g. overgrown; ruined. In certain circumstances also used for a second control feature where the description requires this i.e. crossing; junction; between.</string>
     <string name="con_des_F_title">Column F – Dimensions / Combinations / Bend</string>
@@ -285,7 +287,8 @@
     <string name="con_des_S7_body">170m from last control to Finish. Follow taped route. </string>
     <string name="con_des_S8_body">130m from last control to Finish. Navigate to finish funnel, then follow tape.</string>
     <string name="con_des_S9_body">220m from last control to Finish. Navigate to finish. No tape.</string>
+    <string name="con_des_S10_body">Map flip (turn the map over)</string>
 
-    <string name="credit_body">Control description information is from the International Orienteering Federation (IOF) International Specification for Control Descriptions – 2018. Further information can be found at http://www.orienteering.org.</string>
+    <string name="credit_body">Control description information is from the International Orienteering Federation (IOF) International Specification for Control Descriptions – 2024. Further information can be found at http://www.orienteering.org.</string>
 
 </resources>
