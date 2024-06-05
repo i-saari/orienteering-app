@@ -68,13 +68,11 @@ object DrawerParams {
  * Main composable run at startup. Provides the foundation for the app. The navigation drawer is
  * the parent composable of the app, with the screens built within it.
  *
- * @param viewModel             ViewModel used to store UI details between screens
  * @param navController         navigation controller for switching screens
  * @param drawerState           state of the navigation drawer
  */
 @Composable
 fun SymbolsApp(
-//    viewModel: SymbolsViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 ) {
