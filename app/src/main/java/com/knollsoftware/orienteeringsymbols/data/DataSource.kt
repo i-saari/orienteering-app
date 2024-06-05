@@ -4,7 +4,6 @@ import androidx.compose.ui.graphics.Color
 import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.model.DescriptionColumn
 import com.knollsoftware.orienteeringsymbols.model.SpecialInstruction
-import com.knollsoftware.orienteeringsymbols.model.Symbol
 
 object DataSource {
 
