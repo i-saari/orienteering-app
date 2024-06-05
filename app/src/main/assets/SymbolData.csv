@@ -1,0 +1,114 @@
+group,image,name,description
+Landforms,terrace_control,Terrace,A level area on a slope.
+Landforms,spur_control,Spur,A contour projection or “nose” rising from the surrounding ground.
+Landforms,reentrant_control,Re-entrant,A contour indentation; a valley; the opposite of a spur.
+Landforms,earth_bank_control,Earth Bank,An abrupt change in ground level which can clearly be distinguished from its surroundings.
+Landforms,quarry_control,Quarry,"Gravel, sand or stone working in flat or inclined ground."
+Landforms,earth_wall_control,Earth Wall,"A narrow wall of earth projecting above the surrounding terrain; may be partially stone faced, usually man-made."
+Landforms,erosion_gully_control,Erosion Gully,"An erosion gully or trench, normally dry."
+Landforms,small_erosion_gully_control,Small Erosion Gully,"A small erosion gully or trench, normally dry. "
+Landforms,hill_control,Hill,A high point. Shown on the map with contour lines.
+Landforms,knoll_control,Knoll,A small obvious mound or knoll. 
+Landforms,saddle_control,Saddle,The low point between two higher points.
+Landforms,depression_control,Depression,A depression or hollow from which the ground rises on all sides. Shown on the map with contour lines.
+Landforms,small_depression_control,Small Depression,"A small, shallow, natural depression or hollow from which the ground rises on all sides."
+Landforms,pit_control,Pit,A pit or hole with distinct steep-sides. Usually man made. Used with the Rocky symbol to indicate a rocky pit.
+Landforms,broken_ground_control,Broken Ground,Clearly disturbed ground with features too small or too numerous to be mapped individually; including animal earths.
+Landforms,ant_hill_control,Ant Hill (termite mound),The mound made by ants or termites.
+Rock and Boulder,cliff_control,"Cliff, Crag",A cliff or rock face. May be passable or impassable.
+Rock and Boulder,rock_pillar_control,Rock Pillar,"A high, natural rock projection."
+Rock and Boulder,cave_control,Cave,"A hole in a rock face or hill side, often leading to underground workings."
+Rock and Boulder,boulder_control,Boulder,A prominent free-standing block of rock or stone.
+Rock and Boulder,boulder_field_control,Boulder Field,An area covered by so many boulders that they cannot be individually mapped.
+Rock and Boulder,boulder_cluster_control,Boulder Cluster,A small distinct group of boulders so closely clustered together that they cannot be individually mapped.
+Rock and Boulder,stony_ground_control,Stony Ground,An area covered with many small stones or rocks.
+Rock and Boulder,bare_rock_control,Bare Rock,A runnable area of rock with no earth or vegetation cover. 
+Rock and Boulder,narrow_passage_control,Narrow Passage,A gap between two cliffs or rock faces that face each other.
+Rock and Boulder,trench_control,Trench,A rocky or artificial trench.
+Water and Marsh,lake_control,Lake,"A large area of water, normally mapped as uncrossable."
+Water and Marsh,pond_control,Pond,"A small area of water, may be shallow or seasonal."
+Water and Marsh,waterhole_control,Waterhole,A water-filled pit or depression.
+Water and Marsh,river_control,"River, Stream",A natural or artificial watercourse with either moving or standing water.
+Water and Marsh,ditch_control,Ditch,A natural or man made minor water channel which may contain water only intermittently.
+Water and Marsh,narrow_marsh_control,Narrow Marsh,"A narrow marsh or trickle of water, too narrow to be shown on the map with the marsh symbol."
+Water and Marsh,marsh_control,Marsh,A permanently wet area with marsh vegetation.
+Water and Marsh,firm_ground_in_marsh_control,Firm Ground In Marsh,"A non-marshy area within a marsh, or between two marshes."
+Water and Marsh,well_control,Well,"A shaft containing water or a captive spring, clearly visible on the ground. Often with some form of man-made surround."
+Water and Marsh,spring_control,Spring,The source of a watercourse with a distinct outflow.
+Water and Marsh,water_tank_control,"Water Tank, Trough",A man made water container.
+Vegetation,open_land_control,Open Land,"An area with no trees. Grassland, a meadow or a field. Also heath or moorland."
+Vegetation,semi_open_land_control,Semi Open Land,An area of open land with scattered trees or bushes.
+Vegetation,forest_corner_control,Forest Corner,The corner or tip of a forested area projecting into open land.
+Vegetation,clearing_control,Clearing,A small area of land free from trees within the forest.
+Vegetation,thicket_control,Thicket,A small area of forest where the tree cover or undergrowth is so dense that it is difficult to pass. May also be used for an individual bush (typically in Sprint competitions).
+Vegetation,linear_thicket_control,Linear Thicket,A man-made line of trees or bushes that is difficult to cross. May also be used for a hedge (typically in Sprint competitions).
+Vegetation,vegetation_boundary_control,Vegetation Boundary,A distinct boundary between different types of trees or vegetation.
+Vegetation,copse_control,Copse,A small area of trees in open ground or a more runnable area of trees surrounded by thicker forest.
+Vegetation,prominent_tree_control,Prominent Tree,An unusual or prominent tree in either open land or forest; frequently information is also given as to its type.
+Vegetation,root_stock_control,"Root Stock, Tree Stump","The upturned root of a fallen tree, with or without the trunk. The stump of a tree."
+Man-made Feature,road_control,Road,"A metalled/asphalt surfaced or dirt road, suitable for vehicles in normal weather conditions."
+Man-made Feature,path_control,"Path, Track",A visible route made by people or animals. Tracks may be driven by rugged vehicles.
+Man-made Feature,ride_control,Ride,A forest ride or a prominent trace through the terrain which does not have a distinct runnable path along it.
+Man-made Feature,bridge_control,Bridge,A crossing point over a watercourse or other linear feature.
+Man-made Feature,power_line_control,Power Line,"A power or telephone line, cableway or ski lift."
+Man-made Feature,power_line_pylon_control,Power Line Pylon,"A support for power or telephone line, cableway or ski lift."
+Man-made Feature,tunnel_control,Tunnel,"A way under roads, railways, etc."
+Man-made Feature,wall_control,Wall,A wall of stone or other materials. Used with the Ruined symbol to indicate a ruined wall.
+Man-made Feature,fence_control,Fence,A wire or wooden boundary. Used with the Ruined symbol to indicate a ruined fence.
+Man-made Feature,crossing_point_control,Crossing Point,"A way through or over a wall, fence, or other linear feature, including a gate or stile."
+Man-made Feature,building_control,Building,"A man-made structure. Typically of brick, wood or stone. A pillar supporting a roof."
+Man-made Feature,paved_area_control,Paved Area,An area of hard standing used for parking or other purposes.
+Man-made Feature,ruin_control,Ruin,The remains of a building that has fallen down.
+Man-made Feature,pipeline_control,Pipeline,"A prominent line feature such as a pipeline (gas, water, oil, etc.) or a bobsleigh/skeleton track which is above ground level."
+Man-made Feature,tower_control,"Tower, Pylon","A metal, wooden or brick tower or pylon."
+Man-made Feature,shooting_platform_control,Shooting Platform,A structure attached to a tree where a marksman or observer can sit.
+Man-made Feature,cairn_control,"Cairn, Boundary Stone","A man made stone or pile of stones. A cairn, memorial stone, boundary stone or trigonometric point."
+Man-made Feature,fodder_rack_control,Fodder Rack,A construction for holding feed for animals.
+Man-made Feature,charcoal_burner_control,"Charcoal Burner, Platform",The clear remains of an area where charcoal was burned. \n\nA small level man made area on a slope (a platform).
+Man-made Feature,monument_control,"Monument, Statue","A monument, memorial or statue."
+Man-made Feature,canopy_control,Canopy,An accessible area with a roof. A canopy or a covered passageway through a building. 
+Man-made Feature,stairway_control,Stairway,A stairway of at least two steps.
+Man-made Feature,out_of_bounds_control,Out Of Bounds,Out of Bounds area. Typically a flower bed or similar feature.
+Special Feature,prominent_feature_o_control,Prominent Feature,"If used, an explanation of its meaning must be supplied to competitors in the pre-race information."
+Special Feature,prominent_feature_x_control,Prominent Feature,"If used, an explanation of its meaning must be supplied to competitors in the pre-race information."
+Which Feature,northern_control,Northern,"The more northern of two similar features, or the northern-most of several similar features."
+Which Feature,south_eastern_control,South Eastern,"The more south eastern of two similar features, or the south-eastern-most of several similar features."
+Which Feature,upper_control,Upper,Where the control feature is directly above a similar feature.
+Which Feature,lower_control,Lower,Where the control feature is directly below a similar feature.
+Which Feature,middle_control,Middle,Where the control feature is the middle one of a number of similar features.
+Appearance,low_control,Low,"Where the control feature is particularly low or flat but this is not indicated on the map; e.g. Hill, low."
+Appearance,shallow_control,Shallow,"Where the control feature is particularly shallow but this is not indicated on the map; e.g. Re-entrant, shallow."
+Appearance,deep_control,Deep,"Where the control feature is particularly deep but this is not indicated on the map; e.g. Pit, deep."
+Appearance,overgrown_control,Overgrown,"Where the feature is partially covered in undergrowth or bushes that are not indicated on the map; e.g. Ruin, overgrown."
+Appearance,open_control,Open,"Where the feature is in an area where the tree cover is less than the surroundings but this is not indicated on the map; e.g. Marsh, open."
+Appearance,rocky_control,"Rocky, Stony","Where the feature is in an area of rocky or stony ground not indicated on the map; e.g. Pit, rocky."
+Appearance,marshy_control,Marshy,"Where the feature is in an area of marshy ground not indicated on the map; e.g. Re-entrant, marshy."
+Appearance,sandy_control,Sandy,"Where the feature is in an area of sandy ground; e.g. Spur, sandy."
+Appearance,needle_leaved_control,Needle Leaved,"Where the tree or trees associated with the control feature have needle shaped leaves; e.g. Prominent  tree, needle leaved."
+Appearance,broad_leaved_control,Broad Leaved,"Where the tree or trees associated with the control feature are broad-leaved; e.g. Copse, broad leaved."
+Appearance,ruined_control,Ruined,"Where the feature has fallen to ground level; e.g. Fence, ruined."
+Dimension/Combination,height_or_depth_control,Height or Depth,Height or Depth of the feature in metres.
+Dimension/Combination,height_on_slope_control,Height on Slope,Height of the feature on a slope in metres.
+Dimension/Combination,size_control,Size,Horizontal dimensions of the feature in metres.
+Dimension/Combination,height_two_features_control,Height of Two Features,Heights of two features with the control between them.
+Dimension/Combination,crossing_control,Crossing,The point at which two linear features cross.
+Dimension/Combination,junction_control,Junction,The point at which two linear features meet; or where a linear feature meets the side or edge of an areal feature.
+Dimension/Combination,bend_control,Bend,Used where a linear feature makes a smooth change of direction; e.g. Path bend; River bend.
+Location,north_east_side_control,North East Side,"Used where: \n\na) The feature extends above the surface of the ground; e.g. Boulder, north east side; Ruin, west side. A control on the side of a raised feature will not usually be visible from the opposite side. \n\nb) The control is located on a linear feature but not at a corner, e.g. Track, east side; Stream bend, south west side."
+Location,south_east_edge_control,South East Edge,"Used where:\n\na) The feature extends down from the surface of the surrounding ground and the control is situated on the edge at ground level; e.g. Depression, south east edge.\n\nb) The feature extends over a significant area and the control is situated on the border of that area; e.g. Marsh, west edge; Clearing, north west edge."
+Location,west_part_control,West Part,"Used where the feature extends over a significant area and the control is located neither at the centre, nor on any of the edges; e.g. Marsh, west part; Depression, south east part."
+Location,east_inside_corner_control,East Corner (inside),"Used where:\n\na) The edge of a feature turns through an angle of 45–135 degrees; e.g. Open land, east corner (inside).\n\nb) A linear feature turns a corner; e.g. Fence, south corner (inside).\n\nNote: The side of a building may be treated as a linear feature and hence “building, east corner (inside)” does not mean “inside the building”. \n\nThe orientation of the symbol indicates the direction in which the corner points."
+Location,south_outside_corner_control,South Corner (outside),"Used where:\n\na) The edge of a feature turns through an angle of 45–135 degrees; e.g. Ruin, north west corner (outside).\n\nb) A linear feature turns a corner; e.g. Stone wall, south west corner (outside).\n\nThe orientation of the symbol indicates the direction in which the corner points."
+Location,south_west_tip_control,South West Tip,"Used where the edge of a feature turns through an angle of less than 45 degrees; e.g. Marsh, south west tip."
+Location,north_west_end_control,North West End,"The point at which a linear feature ends or starts; e.g. Ride, north west end; Stone wall, south end."
+Location,upper_part_control,Upper Part,"Where the feature extends over two or more contours and the control is located near the top; e.g. Erosion Gully, upper part."
+Location,lower_part_control,Lower Part,"Where the feature extends over two or more contours and the control is located near the bottom; e.g. Re-entrant, lower part."
+Location,top_control,Top,"Where the control is located at the highest point of the feature and this is not the default location; e.g. Cliff, top; Stairway, top. The upper of two levels."
+Location,foot_control,Foot (no direction),"Where the control is located at the lower junction of the slope of the feature and the surface of the surrounding area and this is not the default location; e.g. Earth bank, foot; Stairway, foot."
+Location,north_east_foot_control,North East Foot,"As above, but where the feature is large enough for the control to be placed in more than one location around it; e.g. Hill, north east foot."
+Location,beneath_control,Beneath,"Where the control is located underneath the feature; e.g. Pipeline, beneath. The lower of two levels."
+Location,between_control,Between,Where the control is located between two features; e.g. Between thickets; Between boulder and knoll.
+Other Information,first_aid_control,First Aid Post,Control site where First Aid is available.
+Other Information,refreshment_control,Refreshment Point,Control site where Refreshments are available.
+Other Information,manned_control_control,Manned Control,Manned control site. 
+Man-made Feature,railway_control,Railway,"A railway, tramway, or other kind of railed track."

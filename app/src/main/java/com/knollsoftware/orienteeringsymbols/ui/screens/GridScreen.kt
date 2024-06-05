@@ -8,19 +8,15 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import com.knollsoftware.orienteeringsymbols.R
-import com.knollsoftware.orienteeringsymbols.data.DataSource.symbols
-import com.knollsoftware.orienteeringsymbols.data.Symbol
+import com.knollsoftware.orienteeringsymbols.model.Symbol
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
 
 /**
@@ -33,6 +29,7 @@ import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
  */
 @Composable
 fun GridScreen(
+    symbols: List<Symbol>,
     drawerState: DrawerState,
     @StringRes title: Int,
     onGridSymbolClick: (Symbol) -> Unit
@@ -74,13 +71,13 @@ fun SymbolGridItem(
         modifier = modifier.clickable { onGridSymbolClick(symbol) },
         contentScale = ContentScale.Crop,
         painter = painterResource(id = symbol.controlImageResourceId),
-        contentDescription = stringResource(id = symbol.name)
+        contentDescription = symbol.name
     )
 }
 
-@Preview
-@Composable
-fun SymbolGridPreview(){
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    GridScreen(drawerState = drawerState, title = R.string.list, onGridSymbolClick = {})
-}
+//@Preview
+//@Composable
+//fun SymbolGridPreview(){
+//    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+//    GridScreen(drawerState = drawerState, title = R.string.list, onGridSymbolClick = {})
+//}

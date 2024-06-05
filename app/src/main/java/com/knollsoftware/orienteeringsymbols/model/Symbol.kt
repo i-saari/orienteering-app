@@ -1,4 +1,4 @@
-package com.knollsoftware.orienteeringsymbols.data
+package com.knollsoftware.orienteeringsymbols.model
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
@@ -8,8 +8,8 @@ import androidx.annotation.StringRes
  */
 
 data class Symbol(
-    @StringRes val group: Int,
+    val group: String,
     @DrawableRes val controlImageResourceId: Int,
-    @StringRes val name: Int,
-    @StringRes val description: Int
+    val name: String,
+    val description: String
 )

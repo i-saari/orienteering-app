@@ -14,7 +14,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.knollsoftware.orienteeringsymbols.data.DataSource.symbols
 import com.knollsoftware.orienteeringsymbols.ui.SymbolsViewModel
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerContent
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerItemInfo
@@ -75,7 +74,7 @@ object DrawerParams {
  */
 @Composable
 fun SymbolsApp(
-    viewModel: SymbolsViewModel = viewModel(),
+//    viewModel: SymbolsViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 ) {
@@ -112,8 +111,9 @@ fun SymbolsApp(
             }
         }
     ) {
+        val symbolsViewModel: SymbolsViewModel = viewModel(factory = SymbolsViewModel.Factory)
+        val uiState by symbolsViewModel.uiState.collectAsState()
 
-        val uiState by viewModel.uiState.collectAsState()
         NavHost(
             navController = navController,
             startDestination = NavOptions.List.name,
@@ -121,26 +121,27 @@ fun SymbolsApp(
         ) {
             composable(route = NavOptions.List.name) {
                 ListScreen(
+                    symbols = uiState.symbols,
                     drawerState = drawerState,
                     title = NavOptions.List.title,
-                    scrollPosition = uiState.symbol,
+                    scrollPosition = uiState.scrollPosition,
                     highlight = uiState.highlight,
                     resetList = {
                         /* reset the selected symbol to the top of the list after flashing the item
                         so that it won't flash again if the user navigates away and then back
                         */
-                        viewModel.setHighlight(false)
-                        viewModel.setSymbol(symbols.first())
+                        symbolsViewModel.resetScrolling()
                     }
                 )
             }
             composable(route = NavOptions.Grid.name) {
                 GridScreen(
+                    symbols = uiState.symbols,
                     drawerState = drawerState,
                     title = NavOptions.Grid.title,
                     onGridSymbolClick = {
-                        viewModel.setSymbol(it)
-                        viewModel.setHighlight(true)
+                        symbolsViewModel.setScrollPosition(it)
+                        symbolsViewModel.setHighlight(true)
                         navController.navigate(NavOptions.List.name)
                     }
                 )

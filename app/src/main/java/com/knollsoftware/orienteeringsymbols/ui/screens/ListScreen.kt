@@ -29,13 +29,11 @@ import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DrawerState
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -52,8 +50,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.data.DataSource.groupColor
-import com.knollsoftware.orienteeringsymbols.data.DataSource.symbols
-import com.knollsoftware.orienteeringsymbols.data.Symbol
+import com.knollsoftware.orienteeringsymbols.model.Symbol
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
 import kotlinx.coroutines.delay
 
@@ -72,9 +69,10 @@ import kotlinx.coroutines.delay
  */
 @Composable
 fun ListScreen(
+    symbols: List<Symbol>,
     drawerState: DrawerState,
     @StringRes title: Int,
-    scrollPosition: Symbol,
+    scrollPosition: Int,
     highlight: Boolean,
     resetList: () -> Unit
 ) {
@@ -102,7 +100,7 @@ fun ListScreen(
         ) }
     ) { innerPadding ->
         val listState = rememberLazyListState(
-            initialFirstVisibleItemIndex = symbols.indexOf(scrollPosition)
+            initialFirstVisibleItemIndex = scrollPosition
         )
         LazyColumn(
             modifier = Modifier
@@ -111,7 +109,7 @@ fun ListScreen(
             state = listState
         ) {
             items(symbols) {
-                val color = if (it == scrollPosition && highlight) {
+                val color = if (it == symbols[scrollPosition] && highlight) {
                     animatedColor
                 } else {
                     baseColor
@@ -182,16 +180,16 @@ fun SymbolListItem(
                         .size(dimensionResource(R.dimen.image_size)),
                     contentScale = ContentScale.FillHeight,
                     painter = painterResource(id = symbol.controlImageResourceId),
-                    contentDescription = stringResource(id = symbol.name)
+                    contentDescription = symbol.name
                 )
                 Column(modifier = Modifier.padding(start = dimensionResource(id = R.dimen.padding_small))) {
                     Text(
-                        text = stringResource(id = symbol.name),
+                        text = symbol.name,
                         style = MaterialTheme.typography.titleLarge,
 //                        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_small))
                     )
                     Text(
-                        text = stringResource(id = symbol.group),
+                        text = symbol.group,
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier
                     )
@@ -248,26 +246,26 @@ fun SymbolExpandButton(
  */
 @Composable
 fun SymbolDescription(
-    @StringRes symbolDescription: Int,
+    symbolDescription: String,
     modifier: Modifier = Modifier
 ) {
     Text(
-        text = stringResource(id = symbolDescription),
+        text = symbolDescription,
         style = MaterialTheme.typography.bodyLarge,
         modifier = modifier
     )
 }
 
-@Preview
-@Composable
-fun ListScreenPreview() {
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-    ListScreen(
-        drawerState = drawerState,
-        title = R.string.list,
-        scrollPosition = symbols.first(),
-        highlight = false
-    ) {
-
-    }
-}
+//@Preview
+//@Composable
+//fun ListScreenPreview() {
+//    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+//    ListScreen(
+//        drawerState = drawerState,
+//        title = R.string.list,
+//        scrollPosition = symbols.first(),
+//        highlight = false
+//    ) {
+//
+//    }
+//}
