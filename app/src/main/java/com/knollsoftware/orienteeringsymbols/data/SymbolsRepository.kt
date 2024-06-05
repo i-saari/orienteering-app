@@ -1,9 +1,6 @@
 package com.knollsoftware.orienteeringsymbols.data
 
 import android.content.Context
-import android.util.Log
-import androidx.compose.ui.graphics.Color
-import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.model.Symbol
 import com.opencsv.CSVReader
 import java.io.InputStreamReader
@@ -12,7 +9,7 @@ interface SymbolsRepository {
     fun getAllSymbols(): List<Symbol>
 }
 
-class LocalSymbolsRepository(private val context: Context) : SymbolsRepository {
+class LocalSymbolsRepository(context: Context) : SymbolsRepository {
     private val symbols: List<Symbol> = readSymbolData(context)
 
     override fun getAllSymbols(): List<Symbol> = symbols
@@ -22,8 +19,6 @@ class LocalSymbolsRepository(private val context: Context) : SymbolsRepository {
         val assetManager = context.assets
         val inputStream = assetManager.open("SymbolData.csv")
         val reader = CSVReader(InputStreamReader(inputStream))
-
-        val header = reader.readNext()
 
         var line: Array<String>? = reader.readNext()
         while (line != null) {
