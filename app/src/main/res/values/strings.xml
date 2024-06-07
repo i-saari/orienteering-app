@@ -5,6 +5,10 @@
     <string name="drawer_list_description">List navigation button</string>
     <string name="grid">Symbol Grid</string>
     <string name="drawer_grid_description">Grid navigation button</string>
+    <string name="search_icon_description">Search icon</string>
+    <string name="clear_icon_description">Clear icon</string>
+    <string name="search_prompt">Search symbols</string>
+    <string name="back_icon">Back icon</string>
     <string name="description">Control Description</string>
     <string name="drawer_description_description">Control description button</string>
     <string name="about">About</string>

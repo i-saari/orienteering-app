@@ -50,7 +50,9 @@ import androidx.compose.ui.unit.dp
 import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.data.DataSource.groupColor
 import com.knollsoftware.orienteeringsymbols.model.Symbol
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.AppBarAction
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchAppBar
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchWidgetState
 import kotlinx.coroutines.delay
 
 /**
@@ -62,18 +64,24 @@ import kotlinx.coroutines.delay
  * @param title                 title to display in the top app bar
  * @param scrollPosition        Symbol to automatically scroll to on composition
  * @param highlight             indicates whether the scrolled to item should flash on composition
- * @param resetList             action(s) to perform a reset of the ViewModel selected symbol to
+ * @param resetSelection             action(s) to perform a reset of the ViewModel selected symbol to
  *                              avoid the list from scrolling and flashing the previously selected
  *                              item after the user has navigated away
  */
 @Composable
 fun ListScreen(
     symbols: List<Symbol>,
-    drawerState: DrawerState,
-    @StringRes title: Int,
+    searchWidgetState: SearchWidgetState,
+    drawerState: DrawerState? = null,
+    @StringRes title: Int? = null,
+    appBarActions: List<AppBarAction>? = null,
+    searchTextState: String,
+    onTextChange: (String) -> Unit,
+    onCloseClicked: () -> Unit,
+    onSearchClicked: (String) -> Unit,
     scrollPosition: Int,
     highlight: Boolean,
-    resetList: () -> Unit
+    resetSelection: () -> Unit,
 ) {
     // Defines the list item flash animation
     val animateDuration = 600L
@@ -82,6 +90,7 @@ fun ListScreen(
     val flashColor = MaterialTheme.colorScheme.primary
     val animatedColor by animateColorAsState(
         targetValue = if (triggerFlash) baseColor else flashColor,
+        label = "listFlash",
         animationSpec = keyframes {
             durationMillis = animateDuration.toInt()
             baseColor at 0
@@ -93,10 +102,17 @@ fun ListScreen(
 
     Scaffold(
         topBar = {
-            SymbolsAppBar(
+            SearchAppBar(
                 drawerState = drawerState,
-                title = title
-        ) }
+                title = title,
+                appBarActions = appBarActions,
+                searchWidgetState = searchWidgetState,
+                searchTextState = searchTextState,
+                onTextChange = onTextChange,
+                onCloseClicked = onCloseClicked,
+                onSearchClicked = onSearchClicked,
+            )
+        }
     ) { innerPadding ->
         val listState = rememberLazyListState(
             initialFirstVisibleItemIndex = scrollPosition
@@ -126,7 +142,7 @@ fun ListScreen(
     LaunchedEffect(Unit) {
         triggerFlash = !triggerFlash
         delay(animateDuration)
-        resetList()
+        resetSelection()
     }
 }
 
@@ -259,11 +275,26 @@ fun SymbolDescription(
 //@Composable
 //fun ListScreenPreview() {
 //    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+//    val previewSymbols = listOf<Symbol>(
+//        Symbol("Landforms", R.drawable.terrace_control, "Terrace", "Description"),
+//        Symbol("Landforms", R.drawable.spur_control, "Spur", "Description"),
+//        Symbol("Landforms", R.drawable.reentrant_control, "Reentrant", "Description"),
+//        )
+//    val actions = listOf<AppBarAction>(
+//        AppBarAction(
+//            icon = Icons.Rounded.Search,
+//            description = stringResource(R.string.search_icon_description),
+//            onClick = {}
+//        )
+//    )
+//
 //    ListScreen(
+//        symbols =previewSymbols,
 //        drawerState = drawerState,
 //        title = R.string.list,
-//        scrollPosition = symbols.first(),
-//        highlight = false
+//        scrollPosition = 0,
+//        highlight = false,
+//        appBarActions = actions
 //    ) {
 //
 //    }

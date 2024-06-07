@@ -16,7 +16,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.knollsoftware.orienteeringsymbols.R
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.DefaultAppBar
 
 /**
  * Composable to build the About screen. The screen simply displays credit text.
@@ -31,9 +31,9 @@ fun AboutScreen(
 ) {
     Scaffold(
         topBar = {
-            SymbolsAppBar(
+            DefaultAppBar(
                 drawerState = drawerState,
-                title = title
+                title = title,
             )
         }
     ) { innerPadding ->

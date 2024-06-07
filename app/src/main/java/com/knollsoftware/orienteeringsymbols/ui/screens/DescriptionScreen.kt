@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.data.DataSource.descriptionColumns
 import com.knollsoftware.orienteeringsymbols.data.DataSource.specialInstructions
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.DefaultAppBar
 
 /**
  * Composable to build the Control Description screen. The screen displays text and images
@@ -44,9 +44,9 @@ fun DescriptionScreen(
 ) {
     Scaffold(
         topBar = {
-            SymbolsAppBar(
+            DefaultAppBar(
                 drawerState = drawerState,
-                title = title
+                title = title,
             )
         }
     ) { innerPadding ->

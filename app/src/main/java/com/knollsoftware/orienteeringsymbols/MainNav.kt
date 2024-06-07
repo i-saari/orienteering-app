@@ -1,6 +1,8 @@
 package com.knollsoftware.orienteeringsymbols
 
 import androidx.annotation.StringRes
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.ModalNavigationDrawer
@@ -8,13 +10,18 @@ import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.knollsoftware.orienteeringsymbols.ui.SymbolsViewModel
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.AppBarAction
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchWidgetState
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerContent
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerItemInfo
 import com.knollsoftware.orienteeringsymbols.ui.screens.AboutScreen
@@ -25,7 +32,7 @@ import com.knollsoftware.orienteeringsymbols.ui.screens.ListScreen
 /**
  * Available navigation routes with the title to be passed to the app top bar
  */
-enum class NavOptions(@StringRes val title: Int){
+enum class NavOptions(@StringRes val title: Int) {
     List(title = R.string.list),
     Grid(title = R.string.grid),
     Description(title = R.string.description),
@@ -71,11 +78,13 @@ object DrawerParams {
  * @param navController         navigation controller for switching screens
  * @param drawerState           state of the navigation drawer
  */
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SymbolsApp(
     navController: NavHostController = rememberNavController(),
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 ) {
+    val symbolsViewModel: SymbolsViewModel = viewModel(factory = SymbolsViewModel.Factory)
     ModalNavigationDrawer(
         drawerState = drawerState,
         drawerContent = {
@@ -84,22 +93,26 @@ fun SymbolsApp(
                 menuItems = DrawerParams.drawerButtons,
             ) { route ->
                 // actions performed when the user clicks the drawer navigation options
-                when(route) {
+                symbolsViewModel.resetList()
+                when (route) {
                     NavOptions.List -> {
                         navController.navigate(route.name) {
                             popUpTo(NavOptions.List.name)
                         }
                     }
+
                     NavOptions.Grid -> {
                         navController.navigate(route.name) {
                             popUpTo(NavOptions.Grid.name)
                         }
                     }
+
                     NavOptions.Description -> {
                         navController.navigate(route.name) {
                             popUpTo(NavOptions.Description.name)
                         }
                     }
+
                     NavOptions.About -> {
                         navController.navigate(route.name) {
                             popUpTo(NavOptions.About.name)
@@ -109,8 +122,23 @@ fun SymbolsApp(
             }
         }
     ) {
-        val symbolsViewModel: SymbolsViewModel = viewModel(factory = SymbolsViewModel.Factory)
         val uiState by symbolsViewModel.uiState.collectAsState()
+        val symbols by symbolsViewModel.symbols.collectAsState()
+        val searchWidgetState by symbolsViewModel.searchWidgetState
+        val searchTextState by symbolsViewModel.searchTextState.collectAsState()
+        val keyboardController = LocalSoftwareKeyboardController.current
+
+        val listAppBarActions = listOf<AppBarAction>(
+            AppBarAction(
+                icon = Icons.Rounded.Search,
+                description = stringResource(R.string.search_icon_description),
+                onClick = {
+                    symbolsViewModel.updateSearchWidgetState(
+                        SearchWidgetState.OPENED
+                    )
+                }
+            )
+        )
 
         NavHost(
             navController = navController,
@@ -119,22 +147,33 @@ fun SymbolsApp(
         ) {
             composable(route = NavOptions.List.name) {
                 ListScreen(
-                    symbols = uiState.symbols,
+                    symbols = symbols,
+                    searchWidgetState = searchWidgetState,
                     drawerState = drawerState,
                     title = NavOptions.List.title,
+                    appBarActions = listAppBarActions,
+                    searchTextState = searchTextState,
+                    onTextChange = { symbolsViewModel.updateSearchTextState(it) },
+                    onCloseClicked = {
+                        symbolsViewModel.updateSearchTextState("")
+                        symbolsViewModel.updateSearchWidgetState(
+                            SearchWidgetState.CLOSED
+                        )
+                    },
+                    onSearchClicked = { keyboardController?.hide() }, // Close keyboard
                     scrollPosition = uiState.scrollPosition,
                     highlight = uiState.highlight,
-                    resetList = {
+                    resetSelection = {
                         /* reset the selected symbol to the top of the list after flashing the item
                         so that it won't flash again if the user navigates away and then back
                         */
-                        symbolsViewModel.resetScrolling()
-                    }
+                        symbolsViewModel.resetList()
+                    },
                 )
             }
             composable(route = NavOptions.Grid.name) {
                 GridScreen(
-                    symbols = uiState.symbols,
+                    symbols = symbols,
                     drawerState = drawerState,
                     title = NavOptions.Grid.title,
                     onGridSymbolClick = {

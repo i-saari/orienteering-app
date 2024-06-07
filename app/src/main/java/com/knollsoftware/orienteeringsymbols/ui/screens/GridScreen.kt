@@ -16,7 +16,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.model.Symbol
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SymbolsAppBar
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.DefaultAppBar
 
 /**
  * Composable to build the Grid screen. Displays a scrollable grid of symbol images and lets
@@ -35,9 +35,9 @@ fun GridScreen(
 ) {
     Scaffold(
         topBar = {
-            SymbolsAppBar(
+            DefaultAppBar(
                 drawerState = drawerState,
-                title = title
+                title = title,
             ) }
     ) {innerPadding ->
         LazyVerticalGrid(

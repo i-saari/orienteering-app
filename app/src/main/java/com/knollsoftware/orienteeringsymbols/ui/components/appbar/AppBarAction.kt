@@ -1,13 +1,12 @@
 package com.knollsoftware.orienteeringsymbols.ui.components.appbar
 
-import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
+import androidx.compose.ui.graphics.vector.ImageVector
 
 /**
  * Class representing a top app bar action button
  */
 data class AppBarAction(
-    @DrawableRes val icon: Int,
-    @StringRes val description: Int,
+    val icon: ImageVector,
+    val description: String,
     val onClick: () -> Unit
 )
