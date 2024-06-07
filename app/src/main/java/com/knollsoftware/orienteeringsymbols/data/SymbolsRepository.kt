@@ -1,6 +1,7 @@
 package com.knollsoftware.orienteeringsymbols.data
 
 import android.content.Context
+import android.util.Log
 import com.knollsoftware.orienteeringsymbols.model.Symbol
 import com.opencsv.CSVReader
 import java.io.InputStreamReader
@@ -19,6 +20,8 @@ class LocalSymbolsRepository(context: Context) : SymbolsRepository {
         val assetManager = context.assets
         val inputStream = assetManager.open("SymbolData.csv")
         val reader = CSVReader(InputStreamReader(inputStream))
+
+        reader.readNext() //skip header
 
         var line: Array<String>? = reader.readNext()
         while (line != null) {
