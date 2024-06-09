@@ -1,5 +1,6 @@
 package com.knollsoftware.orienteeringsymbols.ui
 
+import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,6 +11,8 @@ import androidx.lifecycle.viewmodel.viewModelFactory
 import com.knollsoftware.orienteeringsymbols.SymbolsApplication
 import com.knollsoftware.orienteeringsymbols.data.SymbolsRepository
 import com.knollsoftware.orienteeringsymbols.model.Symbol
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterItem
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterWidgetState
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchWidgetState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -32,31 +35,46 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
     private val _searchTextState = MutableStateFlow("")
     val searchTextState = _searchTextState.asStateFlow()
 
-    private val _symbols = MutableStateFlow(symbolsRepository.getAllSymbols())
-//    val symbols = _symbols
-    val symbols = searchTextState
-    .combine(_symbols) { query, symbols ->
-        when {
-            query.isNotEmpty() -> symbols.filter { symbol ->
-                symbol.name.contains(query, ignoreCase = true) ||
-                        symbol.description.contains(query, ignoreCase = true)
-            }
-            else -> symbols
-        }
-    }
-    .stateIn(
-        scope = viewModelScope,
-        initialValue = _symbols.value,
-        started = SharingStarted.WhileSubscribed(5000)
+    private val _filterWidgetState = mutableStateOf(FilterWidgetState.CLOSED)
+    val filterWidgetState = _filterWidgetState
+
+    private val _filterGroups = MutableStateFlow<List<FilterItem>>(
+        symbolsRepository.getGroups().map { FilterItem(it, false) }
     )
+    val filterGroups = _filterGroups.asStateFlow()
 
+    private val _symbols = MutableStateFlow(symbolsRepository.getAllSymbols())
+    val symbols = searchTextState
+        .combine(_symbols) { query, symbols ->
+            query to symbols
+        }
+        .combine(_filterGroups) { (query, symbols), filterGroups ->
+            val filteredSymbols = if (filterGroups.any { it.selected }) {
+                symbols.filter { symbol ->
+                    filterGroups.any { it.selected && it.group == symbol.group }
+                }
+            } else {
+                symbols
+            }
 
+            when {
+                query.isNotEmpty() -> filteredSymbols.filter { symbol ->
+                    symbol.name.contains(query, ignoreCase = true) ||
+                            symbol.description.contains(query, ignoreCase = true)
+                }
+
+                else -> filteredSymbols
+            }
+        }
+        .stateIn(
+            scope = viewModelScope,
+            initialValue = _symbols.value,
+            started = SharingStarted.WhileSubscribed(5000)
+        )
 
     init {
-//        val loadedSymbols = symbolsRepository.getAllSymbols()
         _uiState.update { currentState ->
             currentState.copy(
-//                symbols = loadedSymbols,
                 scrollPosition = 0,
                 highlight = false
             )
@@ -67,8 +85,22 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
         _searchWidgetState.value = newValue
     }
 
+    fun toggleFilterWidgetState() {
+        if (_filterWidgetState.value == FilterWidgetState.CLOSED) {
+            _filterWidgetState.value = FilterWidgetState.OPENED
+        } else {
+            _filterWidgetState.value = FilterWidgetState.CLOSED
+        }
+    }
+
     fun updateSearchTextState(newValue: String) {
         _searchTextState.value = newValue
+    }
+
+    fun toggleFilterChip(currentGroupItem: FilterItem) {
+        val newGroupItem = FilterItem(currentGroupItem.group, !currentGroupItem.selected)
+        val newList = _filterGroups.value.mapButReplace(currentGroupItem, newGroupItem)
+        _filterGroups.value = newList
     }
 
     /**
@@ -112,6 +144,14 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
                 val symbolsRepository = application.container.symbolsRepository
                 SymbolsViewModel(symbolsRepository = symbolsRepository)
             }
+        }
+    }
+
+    private fun <T> List<T>.mapButReplace(targetItem: T, newItem: T) = map {
+        if (it == targetItem) {
+            newItem
+        } else {
+            it
         }
     }
 

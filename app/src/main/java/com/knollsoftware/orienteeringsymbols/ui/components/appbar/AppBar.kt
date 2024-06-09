@@ -2,6 +2,11 @@ package com.knollsoftware.orienteeringsymbols.ui.components.appbar
 
 import android.util.Log
 import androidx.annotation.StringRes
+import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FastOutLinearInEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.text.KeyboardActions
@@ -9,6 +14,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.FilterList
 import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.DrawerState
@@ -22,10 +28,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarColors
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
@@ -34,10 +46,12 @@ import androidx.compose.ui.unit.dp
 import com.knollsoftware.orienteeringsymbols.R
 import kotlinx.coroutines.launch
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchAppBar(
     modifier: Modifier = Modifier,
     searchWidgetState: SearchWidgetState,
+    filterWidgetState: FilterWidgetState,
     drawerState: DrawerState? = null,
     @StringRes title: Int? = null,
     appBarActions: List<AppBarAction>? = null,
@@ -45,25 +59,38 @@ fun SearchAppBar(
     onTextChange: (String) -> Unit,
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit,
+    filterItems: List<FilterItem>,
+    onFilterClick: (FilterItem) -> Unit
 ) {
-    when (searchWidgetState) {
-        SearchWidgetState.CLOSED -> {
-            DefaultAppBar(
-                modifier = modifier,
-                drawerState = drawerState,
-                title = title,
-                appBarActions = appBarActions,
-            )
+    Column {
+        when (searchWidgetState) {
+            SearchWidgetState.CLOSED -> {
+                DefaultAppBar(
+                    modifier = modifier,
+                    drawerState = drawerState,
+                    title = title,
+                    appBarActions = appBarActions,
+                )
+            }
+            SearchWidgetState.OPENED -> {
+                SearchField(
+                    searchText = searchTextState,
+                    onTextChange = onTextChange,
+                    onCloseClicked = onCloseClicked,
+                    onSearchClicked = onSearchClicked
+                )
+            }
         }
-        SearchWidgetState.OPENED -> {
-            SearchField(
-                searchText = searchTextState,
-                onTextChange = onTextChange,
-                onCloseClicked = onCloseClicked,
-                onSearchClicked = onSearchClicked
-            )
+        if (filterWidgetState == FilterWidgetState.OPENED) {
+            TopAppBarSurface {
+                FilterBar(
+                    filterItems = filterItems,
+                    onClick = onFilterClick
+                )
+            }
         }
     }
+
 }
 
 /**
@@ -166,6 +193,32 @@ fun SearchField(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun TopAppBarSurface(
+    modifier: Modifier = Modifier,
+    colors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(),
+    scrollBehavior: TopAppBarScrollBehavior? = null,
+    content: @Composable () -> Unit,
+) {
+//    val colorTransitionFraction = scrollBehavior?.state?.overlappedFraction ?: 0f
+//    val fraction = if (colorTransitionFraction > 0.01f) 1f else 0f
+//    val appBarContainerColor by animateColorAsState(
+//        targetValue = lerp(
+//            colors.containerColor,
+//            colors.scrolledContainerColor,
+//            FastOutLinearInEasing.transform(fraction),
+//        ),
+//        animationSpec = spring(stiffness = Spring.StiffnessMediumLow),
+//        label = "TopBarSurfaceContainerColorAnimation",
+//    )
+    Surface(
+        modifier = modifier.fillMaxWidth(),
+        color = MaterialTheme.colorScheme.surface,
+        content = content
+    )
+}
+
 /**
  * Composable of the navigation drawer icon
  *
@@ -193,6 +246,11 @@ enum class SearchWidgetState {
     CLOSED
 }
 
+enum class FilterWidgetState {
+    OPENED,
+    CLOSED
+}
+
 /**
  * Composable of a top app bar action button
  *
@@ -210,6 +268,43 @@ fun AppBarAction(appBarAction: AppBarAction) {
 
 @Composable
 @Preview
+fun MainAppBarPreview(
+    drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+) {
+    val actions = listOf<AppBarAction>(
+        AppBarAction(
+            icon = Icons.Rounded.Search,
+            description = stringResource(R.string.search_icon_description),
+            onClick = {}
+        ),
+        AppBarAction(
+            icon = Icons.Rounded.FilterList,
+            description = stringResource(R.string.filter_icon_description),
+            onClick = {}
+        )
+    )
+    val previewFilterItems = listOf<FilterItem>(
+        FilterItem("Landforms", false),
+        FilterItem("Rock and Boulder", false),
+        FilterItem("Water and Marsh", false)
+    )
+    SearchAppBar(
+        drawerState = drawerState,
+        title = R.string.list,
+        appBarActions = actions,
+        searchWidgetState = SearchWidgetState.CLOSED,
+        filterWidgetState = FilterWidgetState.OPENED,
+        searchTextState = "",
+        onTextChange = {},
+        onCloseClicked = { },
+        onSearchClicked = {},
+        filterItems = previewFilterItems,
+        onFilterClick = {}
+    )
+}
+
+@Composable
+@Preview
 fun DefaultAppBarPreview(
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 ) {
@@ -217,6 +312,11 @@ fun DefaultAppBarPreview(
         AppBarAction(
             icon = Icons.Rounded.Search,
             description = stringResource(R.string.search_icon_description),
+            onClick = {}
+        ),
+        AppBarAction(
+            icon = Icons.Rounded.FilterList,
+            description = stringResource(R.string.filter_icon_description),
             onClick = {}
         )
     )

@@ -2,6 +2,7 @@ package com.knollsoftware.orienteeringsymbols
 
 import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.FilterList
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -21,6 +22,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.knollsoftware.orienteeringsymbols.ui.SymbolsViewModel
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.AppBarAction
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterWidgetState
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchWidgetState
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerContent
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerItemInfo
@@ -126,6 +128,8 @@ fun SymbolsApp(
         val symbols by symbolsViewModel.symbols.collectAsState()
         val searchWidgetState by symbolsViewModel.searchWidgetState
         val searchTextState by symbolsViewModel.searchTextState.collectAsState()
+        val filterWidgetState by symbolsViewModel.filterWidgetState
+        val filterItems by symbolsViewModel.filterGroups.collectAsState()
         val keyboardController = LocalSoftwareKeyboardController.current
 
         val listAppBarActions = listOf<AppBarAction>(
@@ -137,6 +141,11 @@ fun SymbolsApp(
                         SearchWidgetState.OPENED
                     )
                 }
+            ),
+            AppBarAction(
+                icon = Icons.Rounded.FilterList,
+                description = stringResource(R.string.filter_icon_description),
+                onClick = { symbolsViewModel.toggleFilterWidgetState() }
             )
         )
 
@@ -149,6 +158,7 @@ fun SymbolsApp(
                 ListScreen(
                     symbols = symbols,
                     searchWidgetState = searchWidgetState,
+                    filterWidgetState = filterWidgetState,
                     drawerState = drawerState,
                     title = NavOptions.List.title,
                     appBarActions = listAppBarActions,
@@ -169,6 +179,10 @@ fun SymbolsApp(
                         */
                         symbolsViewModel.resetList()
                     },
+                    filterItems = filterItems,
+                    onFilterClick = { item ->
+                        symbolsViewModel.toggleFilterChip(item)
+                    }
                 )
             }
             composable(route = NavOptions.Grid.name) {

@@ -26,14 +26,17 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DrawerState
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -46,11 +49,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.data.DataSource.groupColor
 import com.knollsoftware.orienteeringsymbols.model.Symbol
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.AppBarAction
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterBar
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterItem
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterWidgetState
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchAppBar
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchWidgetState
 import kotlinx.coroutines.delay
@@ -72,6 +79,7 @@ import kotlinx.coroutines.delay
 fun ListScreen(
     symbols: List<Symbol>,
     searchWidgetState: SearchWidgetState,
+    filterWidgetState: FilterWidgetState,
     drawerState: DrawerState? = null,
     @StringRes title: Int? = null,
     appBarActions: List<AppBarAction>? = null,
@@ -82,6 +90,8 @@ fun ListScreen(
     scrollPosition: Int,
     highlight: Boolean,
     resetSelection: () -> Unit,
+    filterItems: List<FilterItem>,
+    onFilterClick: (FilterItem) -> Unit
 ) {
     // Defines the list item flash animation
     val animateDuration = 600L
@@ -107,10 +117,13 @@ fun ListScreen(
                 title = title,
                 appBarActions = appBarActions,
                 searchWidgetState = searchWidgetState,
+                filterWidgetState = filterWidgetState,
                 searchTextState = searchTextState,
                 onTextChange = onTextChange,
                 onCloseClicked = onCloseClicked,
                 onSearchClicked = onSearchClicked,
+                filterItems = filterItems,
+                onFilterClick = onFilterClick
             )
         }
     ) { innerPadding ->
@@ -136,6 +149,7 @@ fun ListScreen(
 
             }
         }
+
     }
 
     // Trigger the list item flash and reset the ViewModel selected symbol
@@ -157,7 +171,7 @@ fun SymbolListItem(
     symbol: Symbol,
     color: Color,
     modifier: Modifier = Modifier
-){
+) {
     // State of list item expansion that displays the symbol description
     var expanded by remember { mutableStateOf(false) }
     Card(
@@ -271,31 +285,35 @@ fun SymbolDescription(
     )
 }
 
-//@Preview
-//@Composable
-//fun ListScreenPreview() {
-//    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-//    val previewSymbols = listOf<Symbol>(
-//        Symbol("Landforms", R.drawable.terrace_control, "Terrace", "Description"),
-//        Symbol("Landforms", R.drawable.spur_control, "Spur", "Description"),
-//        Symbol("Landforms", R.drawable.reentrant_control, "Reentrant", "Description"),
-//        )
-//    val actions = listOf<AppBarAction>(
-//        AppBarAction(
-//            icon = Icons.Rounded.Search,
-//            description = stringResource(R.string.search_icon_description),
-//            onClick = {}
-//        )
-//    )
-//
-//    ListScreen(
-//        symbols =previewSymbols,
-//        drawerState = drawerState,
-//        title = R.string.list,
-//        scrollPosition = 0,
-//        highlight = false,
-//        appBarActions = actions
-//    ) {
-//
-//    }
-//}
+@Preview
+@Composable
+fun ListScreenPreview() {
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+    val previewSymbols = listOf<Symbol>(
+        Symbol("Landforms", R.drawable.terrace_control, "Terrace", "Description"),
+        Symbol("Landforms", R.drawable.spur_control, "Spur", "Description"),
+        Symbol("Landforms", R.drawable.reentrant_control, "Reentrant", "Description"),
+    )
+    val actions = listOf<AppBarAction>(
+        AppBarAction(
+            icon = Icons.Rounded.Search,
+            description = stringResource(R.string.search_icon_description),
+            onClick = {}
+        )
+    )
+
+    ListScreen(
+        symbols = previewSymbols,
+        searchWidgetState = SearchWidgetState.CLOSED,
+        filterWidgetState = FilterWidgetState.CLOSED,
+        searchTextState = "",
+        onTextChange = {},
+        onCloseClicked = { },
+        onSearchClicked = {},
+        scrollPosition = 0,
+        highlight = false,
+        resetSelection = {},
+        filterItems = emptyList(),
+        onFilterClick = {}
+    )
+}

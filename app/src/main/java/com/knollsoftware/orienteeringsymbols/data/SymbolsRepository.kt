@@ -8,12 +8,15 @@ import java.io.InputStreamReader
 
 interface SymbolsRepository {
     fun getAllSymbols(): List<Symbol>
+    fun getGroups(): List<String>
 }
 
 class LocalSymbolsRepository(context: Context) : SymbolsRepository {
     private val symbols: List<Symbol> = readSymbolData(context)
 
     override fun getAllSymbols(): List<Symbol> = symbols
+
+    override fun getGroups(): List<String> = symbols.map { it.group }.distinct()
 
     private fun readSymbolData(context: Context): List<Symbol> {
         val symbolList = mutableListOf<Symbol>()

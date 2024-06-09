@@ -6,6 +6,7 @@
     <string name="grid">Symbol Grid</string>
     <string name="drawer_grid_description">Grid navigation button</string>
     <string name="search_icon_description">Search icon</string>
+    <string name="filter_icon_description">Filter icon</string>
     <string name="clear_icon_description">Clear icon</string>
     <string name="search_prompt">Search symbols</string>
     <string name="back_icon">Back icon</string>
