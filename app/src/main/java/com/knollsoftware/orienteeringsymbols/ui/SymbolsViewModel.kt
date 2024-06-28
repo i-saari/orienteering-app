@@ -99,8 +99,7 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
 
     fun toggleFilterChip(currentGroupItem: FilterItem) {
         val newGroupItem = FilterItem(currentGroupItem.group, !currentGroupItem.selected)
-        val newList = _filterGroups.value.mapButReplace(currentGroupItem, newGroupItem)
-        _filterGroups.value = newList
+        _filterGroups.value = _filterGroups.value.mapButReplace(currentGroupItem, newGroupItem)
     }
 
     /**
@@ -129,6 +128,9 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
     fun resetList() {
         _searchWidgetState.value = SearchWidgetState.CLOSED
         _searchTextState.value = ""
+        _filterWidgetState.value = FilterWidgetState.CLOSED
+        _filterGroups.value = _filterGroups.value.map { it.copy(selected = false) }
+
         _uiState.update { currentState ->
             currentState.copy(
                 scrollPosition = 0,
