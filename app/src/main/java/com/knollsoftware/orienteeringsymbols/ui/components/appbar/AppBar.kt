@@ -147,8 +147,8 @@ fun SearchField(
     Surface(
         modifier = Modifier
             .fillMaxWidth()
-            .height(56.dp),
-        color = MaterialTheme.colorScheme.primary
+            .height(64.dp),
+//        color = MaterialTheme.colorScheme.primary
     ) {
         TextField(
             modifier = Modifier
@@ -177,10 +177,12 @@ fun SearchField(
                 IconButton(
                     onClick = { onTextChange("") }
                 ) {
-                    Icon(
-                        Icons.Rounded.Close,
-                        contentDescription = stringResource(R.string.clear_icon_description)
-                    )
+                    if (searchText != "") {
+                        Icon(
+                            Icons.Rounded.Close,
+                            contentDescription = stringResource(R.string.clear_icon_description)
+                        )
+                    }
                 }
             },
             keyboardOptions = KeyboardOptions(
@@ -189,6 +191,13 @@ fun SearchField(
             keyboardActions = KeyboardActions(
                 onSearch = { onSearchClicked(searchText) }
             ),
+            colors = TextFieldDefaults.colors(
+                unfocusedContainerColor = MaterialTheme.colorScheme.surface,
+                focusedContainerColor = MaterialTheme.colorScheme.surface,
+                unfocusedIndicatorColor = Color.Transparent,
+                focusedIndicatorColor = Color.Transparent
+
+            )
         )
     }
 }
@@ -292,7 +301,7 @@ fun MainAppBarPreview(
         drawerState = drawerState,
         title = R.string.list,
         appBarActions = actions,
-        searchWidgetState = SearchWidgetState.CLOSED,
+        searchWidgetState = SearchWidgetState.OPENED,
         filterWidgetState = FilterWidgetState.OPENED,
         searchTextState = "",
         onTextChange = {},
