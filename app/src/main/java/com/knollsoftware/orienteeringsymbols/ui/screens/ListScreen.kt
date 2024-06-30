@@ -77,21 +77,11 @@ import kotlinx.coroutines.delay
  */
 @Composable
 fun ListScreen(
+    listAppBar: @Composable () -> Unit,
     symbols: List<Symbol>,
-    searchWidgetState: SearchWidgetState,
-    filterWidgetState: FilterWidgetState,
-    drawerState: DrawerState? = null,
-    @StringRes title: Int? = null,
-    appBarActions: List<AppBarAction>? = null,
-    searchTextState: String,
-    onTextChange: (String) -> Unit,
-    onCloseClicked: () -> Unit,
-    onSearchClicked: (String) -> Unit,
     scrollPosition: Int,
     highlight: Boolean,
     resetSelection: () -> Unit,
-    filterItems: List<FilterItem>,
-    onFilterClick: (FilterItem) -> Unit
 ) {
     // Defines the list item flash animation
     val animateDuration = 600L
@@ -112,19 +102,7 @@ fun ListScreen(
 
     Scaffold(
         topBar = {
-            SearchAppBar(
-                drawerState = drawerState,
-                title = title,
-                appBarActions = appBarActions,
-                searchWidgetState = searchWidgetState,
-                filterWidgetState = filterWidgetState,
-                searchTextState = searchTextState,
-                onTextChange = onTextChange,
-                onCloseClicked = onCloseClicked,
-                onSearchClicked = onSearchClicked,
-                filterItems = filterItems,
-                onFilterClick = onFilterClick
-            )
+            listAppBar()
         }
     ) { innerPadding ->
         val listState = rememberLazyListState(
@@ -288,32 +266,17 @@ fun SymbolDescription(
 @Preview
 @Composable
 fun ListScreenPreview() {
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
     val previewSymbols = listOf<Symbol>(
         Symbol("Landforms", R.drawable.terrace_control, "Terrace", "Description"),
         Symbol("Landforms", R.drawable.spur_control, "Spur", "Description"),
         Symbol("Landforms", R.drawable.reentrant_control, "Reentrant", "Description"),
     )
-    val actions = listOf<AppBarAction>(
-        AppBarAction(
-            icon = Icons.Rounded.Search,
-            description = stringResource(R.string.search_icon_description),
-            onClick = {}
-        )
-    )
 
     ListScreen(
+        listAppBar = {},
         symbols = previewSymbols,
-        searchWidgetState = SearchWidgetState.CLOSED,
-        filterWidgetState = FilterWidgetState.CLOSED,
-        searchTextState = "",
-        onTextChange = {},
-        onCloseClicked = { },
-        onSearchClicked = {},
         scrollPosition = 0,
         highlight = false,
         resetSelection = {},
-        filterItems = emptyList(),
-        onFilterClick = {}
     )
 }

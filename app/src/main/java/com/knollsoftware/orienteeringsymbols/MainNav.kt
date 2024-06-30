@@ -23,6 +23,7 @@ import androidx.navigation.compose.rememberNavController
 import com.knollsoftware.orienteeringsymbols.ui.SymbolsViewModel
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.AppBarAction
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterWidgetState
+import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchAppBar
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchWidgetState
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerContent
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerItemInfo
@@ -156,21 +157,29 @@ fun SymbolsApp(
         ) {
             composable(route = NavOptions.List.name) {
                 ListScreen(
-                    symbols = symbols,
-                    searchWidgetState = searchWidgetState,
-                    filterWidgetState = filterWidgetState,
-                    drawerState = drawerState,
-                    title = NavOptions.List.title,
-                    appBarActions = listAppBarActions,
-                    searchTextState = searchTextState,
-                    onTextChange = { symbolsViewModel.updateSearchTextState(it) },
-                    onCloseClicked = {
-                        symbolsViewModel.updateSearchTextState("")
-                        symbolsViewModel.updateSearchWidgetState(
-                            SearchWidgetState.CLOSED
+                    listAppBar = {
+                        SearchAppBar(
+                            drawerState = drawerState,
+                            title = NavOptions.List.title,
+                            appBarActions = listAppBarActions,
+                            searchWidgetState = searchWidgetState,
+                            filterWidgetState = filterWidgetState,
+                            searchTextState = searchTextState,
+                            onTextChange = { symbolsViewModel.updateSearchTextState(it) },
+                            onCloseClicked = {
+                                symbolsViewModel.updateSearchTextState("")
+                                symbolsViewModel.updateSearchWidgetState(
+                                    SearchWidgetState.CLOSED
+                                )
+                            },
+                            onSearchClicked = { keyboardController?.hide() },
+                            filterItems = filterItems,
+                            onFilterClick = { item ->
+                                symbolsViewModel.toggleFilterChip(item)
+                            }
                         )
-                    },
-                    onSearchClicked = { keyboardController?.hide() }, // Close keyboard
+                    } ,
+                    symbols = symbols,
                     scrollPosition = uiState.scrollPosition,
                     highlight = uiState.highlight,
                     resetSelection = {
@@ -179,17 +188,13 @@ fun SymbolsApp(
                         */
                         symbolsViewModel.resetList()
                     },
-                    filterItems = filterItems,
-                    onFilterClick = { item ->
-                        symbolsViewModel.toggleFilterChip(item)
-                    }
                 )
             }
             composable(route = NavOptions.Grid.name) {
                 GridScreen(
-                    symbols = symbols,
                     drawerState = drawerState,
                     title = NavOptions.Grid.title,
+                    symbols = symbols,
                     onGridSymbolClick = {
                         symbolsViewModel.setScrollPosition(it)
                         symbolsViewModel.setHighlight(true)
