@@ -14,7 +14,7 @@
     <string name="drawer_description_description">Control description button</string>
     <string name="about">About</string>
     <string name="drawer_about_description">About navigation button</string>
-    <string name="drawer_icon_description">Menu navigation button</string>
+    <string name="drawer_icon_description">Menu navigation drawer</string>
     <string name="expand_button_content_description">See symbol description</string>
     <string name="example_control_description_labeled">Example Labeled Control Description</string>
 
@@ -95,8 +95,8 @@
     <string name="pond_name">Pond</string>
     <string name="power_line_name">Power Line</string>
     <string name="power_line_pylon_name">Power Line Pylon</string>
-    <string name="prominent_feature_o_name">Prominent Feature</string>
-    <string name="prominent_feature_x_name">Prominent Feature</string>
+    <string name="prominent_feature_o_name">Prominent Feature O</string>
+    <string name="prominent_feature_x_name">Prominent Feature X</string>
     <string name="prominent_tree_name">Prominent Tree</string>
     <string name="quarry_name">Quarry</string>
     <string name="railway_name">Railway</string>
