@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 
@@ -49,6 +50,7 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
             query to symbols
         }
         .combine(_filterGroups) { (query, symbols), filterGroups ->
+            // Filter buttons logic
             val filteredSymbols = if (filterGroups.any { it.selected }) {
                 symbols.filter { symbol ->
                     filterGroups.any { it.selected && it.group == symbol.group }
@@ -57,6 +59,7 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
                 symbols
             }
 
+            // Search query logic
             when {
                 query.isNotEmpty() -> filteredSymbols.filter { symbol ->
                     symbol.name.contains(query, ignoreCase = true) ||
@@ -71,6 +74,9 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
             initialValue = _symbols.value,
             started = SharingStarted.WhileSubscribed(5000)
         )
+
+    private val _selectedSymbol = mutableStateOf(_symbols.value[0])
+    val selectedSymbol = _selectedSymbol
 
     init {
         _uiState.update { currentState ->
@@ -112,6 +118,10 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
 //            currentState.copy(scrollPosition = currentState.symbols.indexOf(selectedSymbol))
             currentState.copy(scrollPosition = _symbols.value.indexOf(selectedSymbol))
         }
+    }
+
+    fun setSelectedSymbol(selectedSymbol: Symbol) {
+        _selectedSymbol.value = selectedSymbol
     }
 
     /**

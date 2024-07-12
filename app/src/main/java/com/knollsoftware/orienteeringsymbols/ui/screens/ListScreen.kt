@@ -6,6 +6,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,6 +23,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
@@ -42,6 +44,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -61,6 +64,7 @@ import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterWidgetSt
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchAppBar
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchWidgetState
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * Composable to build the List screen. Displays a scrollable list of symbols showing the symbol
@@ -75,14 +79,25 @@ import kotlinx.coroutines.delay
  *                              avoid the list from scrolling and flashing the previously selected
  *                              item after the user has navigated away
  */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ListScreen(
     listAppBar: @Composable () -> Unit,
     symbols: List<Symbol>,
     scrollPosition: Int,
+    selectedSymbol: Symbol,
     highlight: Boolean,
     resetSelection: () -> Unit,
 ) {
+    val groupedSymbols = symbols.groupBy { it.group }
+    var spurIndex by remember { mutableStateOf(0) }
+    val flatList = mutableListOf<Any>()
+    for ((group, symbols) in groupedSymbols) {
+        flatList.add(group)
+        flatList.addAll(symbols)
+    }
+    val internalScrollPosition = flatList.indexOfFirst { it == selectedSymbol }
+
     // Defines the list item flash animation
     val animateDuration = 600L
     var triggerFlash by remember { mutableStateOf(false) }
@@ -100,6 +115,15 @@ fun ListScreen(
         }
     )
 
+    val coroutineScope = rememberCoroutineScope()
+    val listState = rememberLazyListState()
+
+    LaunchedEffect(Unit) {
+        coroutineScope.launch {
+            listState.animateScrollToItem(internalScrollPosition)
+        }
+    }
+
     Scaffold(
         topBar = {
             listAppBar()
@@ -114,17 +138,22 @@ fun ListScreen(
                 .padding(innerPadding),
             state = listState
         ) {
-            items(symbols) {
-                val color = if (it == symbols[scrollPosition] && highlight) {
-                    animatedColor
-                } else {
-                    baseColor
+            groupedSymbols.forEach { (group, symbols) ->
+                stickyHeader {
+                    SymbolHeader(group)
                 }
-                SymbolListItem(
-                    symbol = it,
-                    color = color
-                )
-
+                items(symbols) { symbol ->
+                    val color = if (symbol == selectedSymbol && highlight) {
+                        animatedColor
+                    } else {
+                        baseColor
+                    }
+                    SymbolListItem(
+                        symbol = symbol,
+                        color = color,
+                        loadExpanded = (symbol == selectedSymbol)
+                    )
+                }
             }
         }
 
@@ -138,6 +167,22 @@ fun ListScreen(
     }
 }
 
+@Composable
+fun SymbolHeader(
+    group: String,
+    modifier: Modifier = Modifier
+) {
+    Text(
+        text = group,
+        style = MaterialTheme.typography.titleLarge,
+        modifier = modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.surface)
+            .padding(dimensionResource(R.dimen.padding_small))
+//            .height(dimensionResource(R.dimen.image_size))
+    )
+}
+
 /**
  * Composable of a symbol list item
  *
@@ -148,10 +193,11 @@ fun ListScreen(
 fun SymbolListItem(
     symbol: Symbol,
     color: Color,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    loadExpanded: Boolean = false,
 ) {
     // State of list item expansion that displays the symbol description
-    var expanded by remember { mutableStateOf(false) }
+    var expanded by remember { mutableStateOf(loadExpanded) }
     Card(
         modifier = modifier
             .clickable { expanded = !expanded },
@@ -195,11 +241,11 @@ fun SymbolListItem(
                         style = MaterialTheme.typography.titleLarge,
 //                        modifier = Modifier.padding(top = dimensionResource(id = R.dimen.padding_small))
                     )
-                    Text(
-                        text = symbol.group,
-                        style = MaterialTheme.typography.titleMedium,
-                        modifier = Modifier
-                    )
+//                    Text(
+//                        text = symbol.group,
+//                        style = MaterialTheme.typography.titleMedium,
+//                        modifier = Modifier
+//                    )
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 SymbolExpandButton(
@@ -275,6 +321,7 @@ fun ListScreenPreview() {
     ListScreen(
         listAppBar = {},
         symbols = previewSymbols,
+        selectedSymbol = previewSymbols[0],
         scrollPosition = 0,
         highlight = false,
         resetSelection = {},

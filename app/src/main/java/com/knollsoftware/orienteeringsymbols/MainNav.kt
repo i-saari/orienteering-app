@@ -132,6 +132,7 @@ fun SymbolsApp(
         val filterWidgetState by symbolsViewModel.filterWidgetState
         val filterItems by symbolsViewModel.filterGroups.collectAsState()
         val keyboardController = LocalSoftwareKeyboardController.current
+        val selectedSymbol by symbolsViewModel.selectedSymbol
 
         val listAppBarActions = listOf<AppBarAction>(
             AppBarAction(
@@ -180,6 +181,7 @@ fun SymbolsApp(
                         )
                     } ,
                     symbols = symbols,
+                    selectedSymbol = selectedSymbol,
                     scrollPosition = uiState.scrollPosition,
                     highlight = uiState.highlight,
                     resetSelection = {
@@ -197,6 +199,7 @@ fun SymbolsApp(
                     symbols = symbols,
                     onGridSymbolClick = {
                         symbolsViewModel.setScrollPosition(it)
+                        symbolsViewModel.setSelectedSymbol(it)
                         symbolsViewModel.setHighlight(true)
                         navController.navigate(NavOptions.List.name)
                     }
