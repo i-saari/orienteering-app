@@ -1,6 +1,5 @@
 package com.knollsoftware.orienteeringsymbols.ui
 
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -19,7 +18,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 
@@ -75,7 +73,7 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
             started = SharingStarted.WhileSubscribed(5000)
         )
 
-    private val _selectedSymbol = mutableStateOf(_symbols.value[0])
+    private val _selectedSymbol = mutableStateOf<Symbol?>(null)
     val selectedSymbol = _selectedSymbol
 
     init {

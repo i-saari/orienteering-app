@@ -1,6 +1,5 @@
 package com.knollsoftware.orienteeringsymbols.ui.screens
 
-import androidx.annotation.StringRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
@@ -23,22 +22,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ExpandLess
 import androidx.compose.material.icons.filled.ExpandMore
-import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.DrawerState
-import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -52,19 +46,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.knollsoftware.orienteeringsymbols.R
 import com.knollsoftware.orienteeringsymbols.data.DataSource.groupColor
 import com.knollsoftware.orienteeringsymbols.model.Symbol
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.AppBarAction
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterBar
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterItem
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterWidgetState
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchAppBar
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchWidgetState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlin.math.log
 
 /**
  * Composable to build the List screen. Displays a scrollable list of symbols showing the symbol
@@ -85,18 +75,35 @@ fun ListScreen(
     listAppBar: @Composable () -> Unit,
     symbols: List<Symbol>,
     scrollPosition: Int,
-    selectedSymbol: Symbol,
+    selectedSymbol: Symbol?,
     highlight: Boolean,
     resetSelection: () -> Unit,
 ) {
     val groupedSymbols = symbols.groupBy { it.group }
-    var spurIndex by remember { mutableStateOf(0) }
-    val flatList = mutableListOf<Any>()
-    for ((group, symbols) in groupedSymbols) {
-        flatList.add(group)
-        flatList.addAll(symbols)
+    var foundIndex = 0
+    var groupIndex = 0
+    if (selectedSymbol != null) {
+        for ((group, symbolList) in groupedSymbols) {
+            if (symbolList.contains(selectedSymbol)) {
+                foundIndex += symbolList.indexOf(selectedSymbol)
+                break
+            } else {
+                foundIndex += symbolList.size
+                groupIndex += 1
+            }
+        }
     }
-    val internalScrollPosition = flatList.indexOfFirst { it == selectedSymbol }
+
+    val groupHeaderStyle = MaterialTheme.typography.bodyLarge
+//    val headerStyleHeight = with(
+//        LocalDensity.current) { groupHeaderStyle.fontSize.value.toDp() }
+//    val offsetDp = (headerStyleHeight + dimensionResource(R.dimen.padding_small))
+//    val offsetPx = with(LocalDensity.current) { offsetDp.toPx() }
+//    Log.d("Debug","Style height: $headerStyleHeight")
+//    Log.d("Debug","Offset Dp: $offsetDp")
+//    Log.d("Debug","Offset Px: $offsetPx")
+
+
 
     // Defines the list item flash animation
     val animateDuration = 600L
@@ -120,7 +127,10 @@ fun ListScreen(
 
     LaunchedEffect(Unit) {
         coroutineScope.launch {
-            listState.animateScrollToItem(internalScrollPosition)
+            listState.animateScrollToItem(
+                index = foundIndex + groupIndex,
+//                scrollOffset = offsetPx.toInt()
+            )
         }
     }
 
@@ -129,9 +139,6 @@ fun ListScreen(
             listAppBar()
         }
     ) { innerPadding ->
-        val listState = rememberLazyListState(
-            initialFirstVisibleItemIndex = scrollPosition
-        )
         LazyColumn(
             modifier = Modifier
                 .fillMaxWidth()
@@ -140,7 +147,7 @@ fun ListScreen(
         ) {
             groupedSymbols.forEach { (group, symbols) ->
                 stickyHeader {
-                    SymbolHeader(group)
+                    GroupHeader(group, groupHeaderStyle)
                 }
                 items(symbols) { symbol ->
                     val color = if (symbol == selectedSymbol && highlight) {
@@ -168,18 +175,18 @@ fun ListScreen(
 }
 
 @Composable
-fun SymbolHeader(
+fun GroupHeader(
     group: String,
+    style: TextStyle,
     modifier: Modifier = Modifier
 ) {
     Text(
         text = group,
-        style = MaterialTheme.typography.titleLarge,
+        style = style,
         modifier = modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.surface)
             .padding(dimensionResource(R.dimen.padding_small))
-//            .height(dimensionResource(R.dimen.image_size))
     )
 }
 
