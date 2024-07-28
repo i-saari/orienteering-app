@@ -1,5 +1,6 @@
 package com.knollsoftware.orienteeringsymbols.ui.screens
 
+import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
@@ -43,6 +44,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -125,11 +128,16 @@ fun ListScreen(
     val coroutineScope = rememberCoroutineScope()
     val listState = rememberLazyListState()
 
-    LaunchedEffect(Unit) {
+    var componentHeight by remember { mutableStateOf(0) }
+
+    val density = LocalDensity.current
+
+    LaunchedEffect(density) {
         coroutineScope.launch {
             listState.animateScrollToItem(
-                index = foundIndex + groupIndex,
-//                scrollOffset = offsetPx.toInt()
+                index = foundIndex + groupIndex + 1,
+//                index = 2
+                scrollOffset = -componentHeight
             )
         }
     }
@@ -147,7 +155,16 @@ fun ListScreen(
         ) {
             groupedSymbols.forEach { (group, symbols) ->
                 stickyHeader {
-                    GroupHeader(group, groupHeaderStyle)
+                    GroupHeader(
+                        group,
+                        groupHeaderStyle,
+                        modifier = Modifier.onGloballyPositioned {
+                            componentHeight = with(density) {
+                                it.size.height
+                            }
+                            Log.d("debug", "height: $componentHeight")
+                        }
+                    )
                 }
                 items(symbols) { symbol ->
                     val color = if (symbol == selectedSymbol && highlight) {
