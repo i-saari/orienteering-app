@@ -25,9 +25,6 @@ import kotlinx.coroutines.flow.update
  * ViewModel object to track user selections and UI statuses between screens and state changes
  */
 class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewModel() {
-    private val _uiState = MutableStateFlow(SymbolsUiState())
-    val uiState: StateFlow<SymbolsUiState> = _uiState.asStateFlow()
-
     private val _searchWidgetState = mutableStateOf(SearchWidgetState.CLOSED)
     val searchWidgetState = _searchWidgetState
 
@@ -41,6 +38,12 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
         symbolsRepository.getGroups().map { FilterItem(it, false) }
     )
     val filterGroups = _filterGroups.asStateFlow()
+
+    private val _selectedSymbol = mutableStateOf<Symbol?>(null)
+    val selectedSymbol = _selectedSymbol
+
+    private val _highlight = mutableStateOf(false)
+    val highlight = _highlight
 
     private val _symbols = MutableStateFlow(symbolsRepository.getAllSymbols())
     val symbols = searchTextState
@@ -73,18 +76,6 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
             started = SharingStarted.WhileSubscribed(5000)
         )
 
-    private val _selectedSymbol = mutableStateOf<Symbol?>(null)
-    val selectedSymbol = _selectedSymbol
-
-    init {
-        _uiState.update { currentState ->
-            currentState.copy(
-                scrollPosition = 0,
-                highlight = false
-            )
-        }
-    }
-
     fun updateSearchWidgetState(newValue: SearchWidgetState) {
         _searchWidgetState.value = newValue
     }
@@ -106,31 +97,9 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
         _filterGroups.value = _filterGroups.value.mapButReplace(currentGroupItem, newGroupItem)
     }
 
-    /**
-     * Update the scroll position to the selected symbol object
-     *
-     * @param selectedSymbol        Symbol object selected by the user
-     */
-    fun setScrollPosition(selectedSymbol: Symbol) {
-        _uiState.update { currentState ->
-//            currentState.copy(scrollPosition = currentState.symbols.indexOf(selectedSymbol))
-            currentState.copy(scrollPosition = _symbols.value.indexOf(selectedSymbol))
-        }
-    }
-
     fun setSelectedSymbol(selectedSymbol: Symbol) {
         _selectedSymbol.value = selectedSymbol
-    }
-
-    /**
-     * Update the uiState to store whether the Symbol List entry should flash
-     *
-     * @param highlight             true indicates the item should flash
-     */
-    fun setHighlight(highlight: Boolean) {
-        _uiState.update { currentState ->
-            currentState.copy(highlight = highlight)
-        }
+        _highlight.value = true
     }
 
     fun resetList() {
@@ -138,13 +107,8 @@ class SymbolsViewModel(private val symbolsRepository: SymbolsRepository) : ViewM
         _searchTextState.value = ""
         _filterWidgetState.value = FilterWidgetState.CLOSED
         _filterGroups.value = _filterGroups.value.map { it.copy(selected = false) }
-
-        _uiState.update { currentState ->
-            currentState.copy(
-                scrollPosition = 0,
-                highlight = false
-            )
-        }
+        _selectedSymbol.value = null
+        _highlight.value = false
     }
 
     companion object {

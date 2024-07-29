@@ -64,9 +64,9 @@ import kotlin.math.log
  * image, title and group. Clicking a list entry will expand the item to show the symbol
  * description.
  *
- * @param drawerState           state of the navigation drawer
- * @param title                 title to display in the top app bar
- * @param scrollPosition        Symbol to automatically scroll to on composition
+ * @param listAppBar            app bar with list-relevant action buttons
+ * @param symbols               list of symbols to show
+ * @param selectedSymbol        symbol to automatically scroll to and open on screen load
  * @param highlight             indicates whether the scrolled to item should flash on composition
  * @param resetSelection             action(s) to perform a reset of the ViewModel selected symbol to
  *                              avoid the list from scrolling and flashing the previously selected
@@ -77,11 +77,11 @@ import kotlin.math.log
 fun ListScreen(
     listAppBar: @Composable () -> Unit,
     symbols: List<Symbol>,
-    scrollPosition: Int,
     selectedSymbol: Symbol?,
     highlight: Boolean,
     resetSelection: () -> Unit,
 ) {
+    // Calculate index of selected symbol
     val groupedSymbols = symbols.groupBy { it.group }
     var foundIndex = 0
     var groupIndex = 0
@@ -98,15 +98,9 @@ fun ListScreen(
     }
 
     val groupHeaderStyle = MaterialTheme.typography.bodyLarge
-//    val headerStyleHeight = with(
-//        LocalDensity.current) { groupHeaderStyle.fontSize.value.toDp() }
-//    val offsetDp = (headerStyleHeight + dimensionResource(R.dimen.padding_small))
-//    val offsetPx = with(LocalDensity.current) { offsetDp.toPx() }
-//    Log.d("Debug","Style height: $headerStyleHeight")
-//    Log.d("Debug","Offset Dp: $offsetDp")
-//    Log.d("Debug","Offset Px: $offsetPx")
-
-
+    val coroutineScope = rememberCoroutineScope()
+    val listState = rememberLazyListState()
+    var componentHeight by remember { mutableStateOf(0) } // Height of sticky header
 
     // Defines the list item flash animation
     val animateDuration = 600L
@@ -125,18 +119,10 @@ fun ListScreen(
         }
     )
 
-    val coroutineScope = rememberCoroutineScope()
-    val listState = rememberLazyListState()
-
-    var componentHeight by remember { mutableStateOf(0) }
-
-    val density = LocalDensity.current
-
-    LaunchedEffect(density) {
+    LaunchedEffect(componentHeight) {
         coroutineScope.launch {
             listState.animateScrollToItem(
                 index = foundIndex + groupIndex + 1,
-//                index = 2
                 scrollOffset = -componentHeight
             )
         }
@@ -159,9 +145,7 @@ fun ListScreen(
                         group,
                         groupHeaderStyle,
                         modifier = Modifier.onGloballyPositioned {
-                            componentHeight = with(density) {
-                                it.size.height
-                            }
+                            componentHeight = it.size.height
                             Log.d("debug", "height: $componentHeight")
                         }
                     )
@@ -346,7 +330,6 @@ fun ListScreenPreview() {
         listAppBar = {},
         symbols = previewSymbols,
         selectedSymbol = previewSymbols[0],
-        scrollPosition = 0,
         highlight = false,
         resetSelection = {},
     )

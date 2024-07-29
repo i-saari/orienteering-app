@@ -125,7 +125,6 @@ fun SymbolsApp(
             }
         }
     ) {
-        val uiState by symbolsViewModel.uiState.collectAsState()
         val symbols by symbolsViewModel.symbols.collectAsState()
         val searchWidgetState by symbolsViewModel.searchWidgetState
         val searchTextState by symbolsViewModel.searchTextState.collectAsState()
@@ -133,6 +132,7 @@ fun SymbolsApp(
         val filterItems by symbolsViewModel.filterGroups.collectAsState()
         val keyboardController = LocalSoftwareKeyboardController.current
         val selectedSymbol by symbolsViewModel.selectedSymbol
+        val highlight by symbolsViewModel.highlight
 
         val listAppBarActions = listOf<AppBarAction>(
             AppBarAction(
@@ -182,8 +182,7 @@ fun SymbolsApp(
                     } ,
                     symbols = symbols,
                     selectedSymbol = selectedSymbol,
-                    scrollPosition = uiState.scrollPosition,
-                    highlight = uiState.highlight,
+                    highlight = highlight,
                     resetSelection = {
                         /* reset the selected symbol to the top of the list after flashing the item
                         so that it won't flash again if the user navigates away and then back
@@ -198,9 +197,7 @@ fun SymbolsApp(
                     title = NavOptions.Grid.title,
                     symbols = symbols,
                     onGridSymbolClick = {
-                        symbolsViewModel.setScrollPosition(it)
                         symbolsViewModel.setSelectedSymbol(it)
-                        symbolsViewModel.setHighlight(true)
                         navController.navigate(NavOptions.List.name)
                     }
                 )
