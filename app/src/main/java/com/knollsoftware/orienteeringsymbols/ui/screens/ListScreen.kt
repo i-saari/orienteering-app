@@ -104,7 +104,7 @@ fun ListScreen(
     val animateDuration = 600L
     var triggerFlash by remember { mutableStateOf(false) }
     val baseColor = MaterialTheme.colorScheme.surface
-    val flashColor = MaterialTheme.colorScheme.primary
+    val flashColor = MaterialTheme.colorScheme.tertiary
     val animatedColor by animateColorAsState(
         targetValue = if (triggerFlash) baseColor else flashColor,
         label = "listFlash",
