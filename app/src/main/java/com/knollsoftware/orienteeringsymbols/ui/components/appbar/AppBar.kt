@@ -28,8 +28,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
@@ -136,6 +140,12 @@ fun SearchField(
     onCloseClicked: () -> Unit,
     onSearchClicked: (String) -> Unit
 ) {
+    val searchFocusRequester = remember { FocusRequester() }
+
+    LaunchedEffect(Unit) {
+        searchFocusRequester.requestFocus()
+    }
+
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -144,7 +154,8 @@ fun SearchField(
     ) {
         TextField(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .focusRequester(searchFocusRequester),
             value = searchText,
             onValueChange = { onTextChange(it) },
             placeholder = {
