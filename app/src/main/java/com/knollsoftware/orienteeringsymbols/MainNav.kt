@@ -22,7 +22,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.knollsoftware.orienteeringsymbols.ui.SymbolsViewModel
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.AppBarAction
-import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterWidgetState
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchAppBar
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchWidgetState
 import com.knollsoftware.orienteeringsymbols.ui.components.appdrawer.AppDrawerContent

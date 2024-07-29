@@ -45,7 +45,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.onGloballyPositioned
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -57,7 +56,6 @@ import com.knollsoftware.orienteeringsymbols.data.DataSource.groupColor
 import com.knollsoftware.orienteeringsymbols.model.Symbol
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 /**
  * Composable to build the List screen. Displays a scrollable list of symbols showing the symbol
@@ -86,7 +84,7 @@ fun ListScreen(
     var foundIndex = 0
     var groupIndex = 0
     if (selectedSymbol != null) {
-        for ((group, symbolList) in groupedSymbols) {
+        for ((_, symbolList) in groupedSymbols) {
             if (symbolList.contains(selectedSymbol)) {
                 foundIndex += symbolList.indexOf(selectedSymbol)
                 break

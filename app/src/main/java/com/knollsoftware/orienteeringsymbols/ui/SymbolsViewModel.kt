@@ -15,11 +15,9 @@ import com.knollsoftware.orienteeringsymbols.ui.components.appbar.FilterWidgetSt
 import com.knollsoftware.orienteeringsymbols.ui.components.appbar.SearchWidgetState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 
 /**
  * ViewModel object to track user selections and UI statuses between screens and state changes
