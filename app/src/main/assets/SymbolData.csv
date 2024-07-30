@@ -1,6 +1,6 @@
-group,image,name,description
+Ôªøgroup,image,name,description
 Landforms,terrace_control,Terrace,A level area on a slope.
-Landforms,spur_control,Spur,A contour projection or ìnoseî rising from the surrounding ground.
+Landforms,spur_control,Spur,A contour projection or ‚Äúnose‚Äù rising from the surrounding ground.
 Landforms,reentrant_control,Re-entrant,A contour indentation; a valley; the opposite of a spur.
 Landforms,earth_bank_control,Earth Bank,An abrupt change in ground level which can clearly be distinguished from its surroundings.
 Landforms,quarry_control,Quarry,"Gravel, sand or stone working in flat or inclined ground."
@@ -64,11 +64,12 @@ Man-made Feature,tower_control,"Tower, Pylon","A metal, wooden or brick tower or
 Man-made Feature,shooting_platform_control,Shooting Platform,A structure attached to a tree where a marksman or observer can sit.
 Man-made Feature,cairn_control,"Cairn, Boundary Stone","A man made stone or pile of stones. A cairn, memorial stone, boundary stone or trigonometric point."
 Man-made Feature,fodder_rack_control,Fodder Rack,A construction for holding feed for animals.
-Man-made Feature,charcoal_burner_control,"Charcoal Burner, Platform",The clear remains of an area where charcoal was burned. \n\nA small level man made area on a slope (a platform).
+Man-made Feature,charcoal_burner_control,"Charcoal Burner, Platform",The clear remains of an area where charcoal was burned. A small level man made area on a slope (a platform).
 Man-made Feature,monument_control,"Monument, Statue","A monument, memorial or statue."
 Man-made Feature,canopy_control,Canopy,An accessible area with a roof. A canopy or a covered passageway through a building. 
 Man-made Feature,stairway_control,Stairway,A stairway of at least two steps.
 Man-made Feature,out_of_bounds_control,Out Of Bounds,Out of Bounds area. Typically a flower bed or similar feature.
+Man-made Feature,railway_control,Railway,"A railway, tramway, or other kind of railed track."
 Special Feature,prominent_feature_o_control,Prominent Feature,"If used, an explanation of its meaning must be supplied to competitors in the pre-race information."
 Special Feature,prominent_feature_x_control,Prominent Feature,"If used, an explanation of its meaning must be supplied to competitors in the pre-race information."
 Which Feature,northern_control,Northern,"The more northern of two similar features, or the northern-most of several similar features."
@@ -94,11 +95,22 @@ Dimension/Combination,height_two_features_control,Height of Two Features,Heights
 Dimension/Combination,crossing_control,Crossing,The point at which two linear features cross.
 Dimension/Combination,junction_control,Junction,The point at which two linear features meet; or where a linear feature meets the side or edge of an areal feature.
 Dimension/Combination,bend_control,Bend,Used where a linear feature makes a smooth change of direction; e.g. Path bend; River bend.
-Location,north_east_side_control,North East Side,"Used where: \n\na) The feature extends above the surface of the ground; e.g. Boulder, north east side; Ruin, west side. A control on the side of a raised feature will not usually be visible from the opposite side. \n\nb) The control is located on a linear feature but not at a corner, e.g. Track, east side; Stream bend, south west side."
-Location,south_east_edge_control,South East Edge,"Used where:\n\na) The feature extends down from the surface of the surrounding ground and the control is situated on the edge at ground level; e.g. Depression, south east edge.\n\nb) The feature extends over a significant area and the control is situated on the border of that area; e.g. Marsh, west edge; Clearing, north west edge."
+Location,north_east_side_control,North East Side,"Used where: 
+a) The feature extends above the surface of the ground; e.g. Boulder, north east side; Ruin, west side. A control on the side of a raised feature will not usually be visible from the opposite side. 
+b) The control is located on a linear feature but not at a corner, e.g. Track, east side; Stream bend, south west side."
+Location,south_east_edge_control,South East Edge,"Used where:
+a) The feature extends down from the surface of the surrounding ground and the control is situated on the edge at ground level; e.g. Depression, south east edge.
+b) The feature extends over a significant area and the control is situated on the border of that area; e.g. Marsh, west edge; Clearing, north west edge."
 Location,west_part_control,West Part,"Used where the feature extends over a significant area and the control is located neither at the centre, nor on any of the edges; e.g. Marsh, west part; Depression, south east part."
-Location,east_inside_corner_control,East Corner (inside),"Used where:\n\na) The edge of a feature turns through an angle of 45ñ135 degrees; e.g. Open land, east corner (inside).\n\nb) A linear feature turns a corner; e.g. Fence, south corner (inside).\n\nNote: The side of a building may be treated as a linear feature and hence ìbuilding, east corner (inside)î does not mean ìinside the buildingî. \n\nThe orientation of the symbol indicates the direction in which the corner points."
-Location,south_outside_corner_control,South Corner (outside),"Used where:\n\na) The edge of a feature turns through an angle of 45ñ135 degrees; e.g. Ruin, north west corner (outside).\n\nb) A linear feature turns a corner; e.g. Stone wall, south west corner (outside).\n\nThe orientation of the symbol indicates the direction in which the corner points."
+Location,east_inside_corner_control,East Corner (inside),"Used where:
+a) The edge of a feature turns through an angle of 45‚Äì135 degrees; e.g. Open land, east corner (inside).
+b) A linear feature turns a corner; e.g. Fence, south corner (inside).
+Note: The side of a building may be treated as a linear feature and hence ‚Äúbuilding, east corner (inside)‚Äù does not mean ‚Äúinside the building‚Äù. 
+The orientation of the symbol indicates the direction in which the corner points."
+Location,south_outside_corner_control,South Corner (outside),"Used where:
+a) The edge of a feature turns through an angle of 45‚Äì135 degrees; e.g. Ruin, north west corner (outside).
+b) A linear feature turns a corner; e.g. Stone wall, south west corner (outside).
+The orientation of the symbol indicates the direction in which the corner points."
 Location,south_west_tip_control,South West Tip,"Used where the edge of a feature turns through an angle of less than 45 degrees; e.g. Marsh, south west tip."
 Location,north_west_end_control,North West End,"The point at which a linear feature ends or starts; e.g. Ride, north west end; Stone wall, south end."
 Location,upper_part_control,Upper Part,"Where the feature extends over two or more contours and the control is located near the top; e.g. Erosion Gully, upper part."
@@ -111,4 +123,3 @@ Location,between_control,Between,Where the control is located between two featur
 Other Information,first_aid_control,First Aid Post,Control site where First Aid is available.
 Other Information,refreshment_control,Refreshment Point,Control site where Refreshments are available.
 Other Information,manned_control_control,Manned Control,Manned control site. 
-Man-made Feature,railway_control,Railway,"A railway, tramway, or other kind of railed track."
