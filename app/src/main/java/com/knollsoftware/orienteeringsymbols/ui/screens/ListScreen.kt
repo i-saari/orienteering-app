@@ -1,6 +1,5 @@
 package com.knollsoftware.orienteeringsymbols.ui.screens
 
-import android.util.Log
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
@@ -144,11 +143,13 @@ fun ListScreen(
                         groupHeaderStyle,
                         modifier = Modifier.onGloballyPositioned {
                             componentHeight = it.size.height
-                            Log.d("debug", "height: $componentHeight")
                         }
                     )
                 }
-                items(symbols) { symbol ->
+                items(
+                    items = symbols,
+                    key = { it.name }
+                ) { symbol ->
                     val color = if (symbol == selectedSymbol && highlight) {
                         animatedColor
                     } else {
