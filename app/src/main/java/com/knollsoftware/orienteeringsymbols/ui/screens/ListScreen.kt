@@ -148,7 +148,7 @@ fun ListScreen(
                 }
                 items(
                     items = symbols,
-                    key = { it.name }
+                    key = { it.controlImageResourceId }
                 ) { symbol ->
                     val color = if (symbol == selectedSymbol && highlight) {
                         animatedColor
